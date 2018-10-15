@@ -2,6 +2,8 @@ package com.quandoo.androidtask.api;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.jetbrains.annotations.Nullable;
+
 public class Table {
 
     @SerializedName("shape")
@@ -9,6 +11,8 @@ public class Table {
 
     @SerializedName("id")
     long id;
+
+    public @Nullable String reservedBy;
 
     @Override
     public String toString() {

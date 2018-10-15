@@ -1,4 +1,4 @@
-package com.quandoo.androidtask;
+package com.quandoo.androidtask.utils;
 
 import android.util.Log;
 

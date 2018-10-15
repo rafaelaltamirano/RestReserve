@@ -1,5 +1,6 @@
-package com.quandoo.androidtask;
+package com.quandoo.androidtask.tables;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.quandoo.androidtask.utils.Logger;
+import com.quandoo.androidtask.R;
 import com.quandoo.androidtask.api.Table;
 
 import java.util.List;
@@ -43,7 +46,13 @@ class TablesRvAdapter extends RecyclerView.Adapter<TablesRvAdapter.TableViewHold
         viewHolder.tableId.setText("" + table.getId());
 
         //TODO : Set name and color depending on reservation status
-        viewHolder.reservingCustomerName.setText("Free");
+        if (table.reservedBy != null) {
+            viewHolder.reservingCustomerName.setText(table.reservedBy);
+            viewHolder.reservingCustomerName.setTextColor(Color.RED);
+        } else {
+            viewHolder.reservingCustomerName.setText("Free");
+            viewHolder.reservingCustomerName.setTextColor(Color.GREEN);
+        }
 
         //TODO : set image depending on table shape
         viewHolder.itemView.setOnClickListener(v -> clickLstnr.onTableItemClick(table));

@@ -1,17 +1,22 @@
-package com.quandoo.androidtask
+package com.quandoo.androidtask.customers
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import com.quandoo.androidtask.utils.Logger
+import com.quandoo.androidtask.R
 import com.quandoo.androidtask.api.Customer
+import com.quandoo.androidtask.api.Reservation
 import com.quandoo.androidtask.api.RestaurantService
 import com.quandoo.androidtask.api.Table
+import com.quandoo.androidtask.tables.TablesActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_customers.*
+import kotlinx.android.synthetic.main.table_cell.*
 import java.lang.RuntimeException
 
 class CustomersActivity : AppCompatActivity(), Logger {
@@ -29,25 +34,20 @@ class CustomersActivity : AppCompatActivity(), Logger {
             throw RuntimeException("Selected table ID cannot be found !")
         }
 
+        recycler_view.adapter = CustomersRvAdapter(TablesActivity.customers, object : CustomersRvAdapter.CustomerClickListener {
+            override fun onCustomerClick(customer: Customer) {
+                log("customer clicked $customer")
 
-        RestaurantService.Creator().create().getCustomers()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableSingleObserver<List<Customer>>() {
-                    override fun onError(e: Throwable) {
-                        log(e.localizedMessage)
-                    }
+                //Reserve table
+                TablesActivity.tables.find { table -> table.id == selectedTableId }?.let {
+                    //create reservation
+                    TablesActivity.reservations.add(Reservation(customer.id, it.id, customer.id + it.id))
+                    it.reservedBy = customer.firstName + " " + customer.lastName
+                }
 
-                    override fun onSuccess(value: List<Customer>) {
-                        recycler_view.adapter = CustomersRvAdapter(value, object : CustomersRvAdapter.CustomerClickListener {
-                            override fun onCustomerClick(customer: Customer) {
-                                log("customer clicked $customer")
-
-                                //TODO : Reserve table
-                            }
-                        })
-                    }
-                })
+                finish()
+            }
+        })
     }
 
     companion object {
