@@ -14,10 +14,17 @@ import java.util.List;
 
 class TablesRvAdapter extends RecyclerView.Adapter<TablesRvAdapter.TableViewHolder> implements Logger {
 
-    private final List<Table> tables;
 
-    TablesRvAdapter(List<Table> tables) {
+    interface TableClickListener {
+        void onTableItemClick(Table clickedTable);
+    }
+
+    private final List<Table> tables;
+    private final TableClickListener clickLstnr;
+
+    TablesRvAdapter(final List<Table> tables, final @NonNull TableClickListener clickLstnr) {
         this.tables = tables;
+        this.clickLstnr = clickLstnr;
     }
 
 
@@ -39,10 +46,7 @@ class TablesRvAdapter extends RecyclerView.Adapter<TablesRvAdapter.TableViewHold
         viewHolder.reservingCustomerName.setText("Free");
 
         //TODO : set image depending on table shape
-
-        viewHolder.itemView.setOnClickListener(v -> {
-            log("Clicked Item");
-        });
+        viewHolder.itemView.setOnClickListener(v -> clickLstnr.onTableItemClick(table));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.quandoo.androidtask;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,7 +43,10 @@ public class MainActivity extends AppCompatActivity implements Logger {
                     @Override
                     public void onSuccess(List<Table> value) {
                         log(value.toString());
-                        rv.setAdapter(new TablesRvAdapter(value));
+                        rv.setAdapter(new TablesRvAdapter(value,
+                                clickedTable ->
+                                        startActivity(CustomersActivity
+                                                .createStartingIntent(clickedTable, MainActivity.this))));
                     }
 
                     @Override
@@ -53,24 +57,6 @@ public class MainActivity extends AppCompatActivity implements Logger {
     }
 
     private void apiTests() {
-        new RestaurantService.Creator().create().getCustomers()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new SingleObserver<List<Customer>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                    }
-
-                    @Override
-                    public void onSuccess(List<Customer> value) {
-                        log(value.toString());
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        error(e.getLocalizedMessage());
-                    }
-                });
 
 
         new RestaurantService.Creator().create().getReservations()
