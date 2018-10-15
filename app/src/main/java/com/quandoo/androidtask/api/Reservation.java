@@ -14,6 +14,12 @@ public class Reservation {
     long id;
 
 
+    public Reservation(long userId, long tableId, long id) {
+        this.userId = userId;
+        this.tableId = tableId;
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Reservation{" +

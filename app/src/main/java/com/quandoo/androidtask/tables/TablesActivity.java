@@ -23,6 +23,12 @@ public class TablesActivity extends AppCompatActivity implements Logger {
 
     private RecyclerView rv;
 
+    public static List<Table> tables;
+    public static List<Reservation> reservations;
+
+    //TODO : load
+//    public static List<Customer> customers;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +37,8 @@ public class TablesActivity extends AppCompatActivity implements Logger {
         rv = findViewById(R.id.recycler_view);
         rv.setLayoutManager(new LinearLayoutManager(this));
 
+
+        if (tables != null) return;
 
         new RestaurantService.Creator().create().getTables()
                 .subscribeOn(Schedulers.io())
@@ -44,10 +52,12 @@ public class TablesActivity extends AppCompatActivity implements Logger {
                     @Override
                     public void onSuccess(List<Table> value) {
                         log(value.toString());
-                        rv.setAdapter(new TablesRvAdapter(value,
+                        tables = value;
+                        rv.setAdapter(new TablesRvAdapter(tables,
                                 clickedTable ->
                                         startActivity(CustomersActivity
                                                 .createStartingIntent(clickedTable, TablesActivity.this))));
+
                     }
 
                     @Override
@@ -55,9 +65,6 @@ public class TablesActivity extends AppCompatActivity implements Logger {
                         error(e.getLocalizedMessage());
                     }
                 });
-    }
-
-    private void apiTests() {
 
 
         new RestaurantService.Creator().create().getReservations()
@@ -72,6 +79,8 @@ public class TablesActivity extends AppCompatActivity implements Logger {
                     @Override
                     public void onSuccess(List<Reservation> value) {
                         log(value.toString());
+                        reservations = value;
+                        //TODO : Load also customers
                     }
 
                     @Override
@@ -79,5 +88,21 @@ public class TablesActivity extends AppCompatActivity implements Logger {
                         error(e.getLocalizedMessage());
                     }
                 });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateTablesIfNeeded();
+    }
+
+    private void updateTablesIfNeeded() {
+        // FIXME : >:) Muhahahahaha
+        if (tables != null && rv.getAdapter() != null) {
+            if ((rv.getAdapter() instanceof TablesRvAdapter)) {
+                TablesRvAdapter adapter = (TablesRvAdapter) rv.getAdapter();
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
 }
