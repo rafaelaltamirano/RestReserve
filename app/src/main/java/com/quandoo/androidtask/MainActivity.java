@@ -2,6 +2,8 @@ package com.quandoo.androidtask;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.quandoo.androidtask.api.Customer;
 import com.quandoo.androidtask.api.Reservation;
@@ -17,29 +19,15 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity implements Logger {
 
+    private RecyclerView rv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new RestaurantService.Creator().create().getCustomers()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new SingleObserver<List<Customer>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                    }
-
-                    @Override
-                    public void onSuccess(List<Customer> value) {
-                        log(value.toString());
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        error(e.getLocalizedMessage());
-                    }
-                });
+        rv = findViewById(R.id.recycler_view);
+        rv.setLayoutManager(new LinearLayoutManager(this));
 
 
         new RestaurantService.Creator().create().getTables()
@@ -53,6 +41,28 @@ public class MainActivity extends AppCompatActivity implements Logger {
 
                     @Override
                     public void onSuccess(List<Table> value) {
+                        log(value.toString());
+                        rv.setAdapter(new TablesRvAdapter(value));
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        error(e.getLocalizedMessage());
+                    }
+                });
+    }
+
+    private void apiTests() {
+        new RestaurantService.Creator().create().getCustomers()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new SingleObserver<List<Customer>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onSuccess(List<Customer> value) {
                         log(value.toString());
                     }
 
