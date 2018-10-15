@@ -1,10 +1,12 @@
-package com.quandoo.androidtask
+package com.quandoo.androidtask.customers
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import com.quandoo.androidtask.utils.Logger
+import com.quandoo.androidtask.R
 import com.quandoo.androidtask.api.Customer
 import com.quandoo.androidtask.api.RestaurantService
 import com.quandoo.androidtask.api.Table

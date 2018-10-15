@@ -1,4 +1,4 @@
-package com.quandoo.androidtask;
+package com.quandoo.androidtask.tables;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.quandoo.androidtask.utils.Logger;
+import com.quandoo.androidtask.R;
 import com.quandoo.androidtask.api.Table;
 
 import java.util.List;
