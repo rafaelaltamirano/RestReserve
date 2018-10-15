@@ -34,30 +34,20 @@ class CustomersActivity : AppCompatActivity(), Logger {
             throw RuntimeException("Selected table ID cannot be found !")
         }
 
+        recycler_view.adapter = CustomersRvAdapter(TablesActivity.customers, object : CustomersRvAdapter.CustomerClickListener {
+            override fun onCustomerClick(customer: Customer) {
+                log("customer clicked $customer")
 
-        RestaurantService.Creator().create().customers
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableSingleObserver<List<Customer>>() {
-                    override fun onError(e: Throwable) {
-                        log(e.localizedMessage)
-                    }
+                //Reserve table
+                TablesActivity.tables.find { table -> table.id == selectedTableId }?.let {
+                    //create reservation
+                    TablesActivity.reservations.add(Reservation(customer.id, it.id, customer.id + it.id))
+                    it.reservedBy = customer.firstName + " " + customer.lastName
+                }
 
-                    override fun onSuccess(value: List<Customer>) {
-                        recycler_view.adapter = CustomersRvAdapter(value, object : CustomersRvAdapter.CustomerClickListener {
-                            override fun onCustomerClick(customer: Customer) {
-                                log("customer clicked $customer")
-
-                                //Reserve table
-                                TablesActivity.tables.find { table -> table.id == selectedTableId }?.let {
-                                    //create reservation
-                                    TablesActivity.reservations.add(Reservation(customer.id, it.id, customer.id + it.id))
-                                    it.reservedBy = customer.firstName + " " + customer.lastName
-                                }
-                            }
-                        })
-                    }
-                })
+                finish()
+            }
+        })
     }
 
     companion object {
