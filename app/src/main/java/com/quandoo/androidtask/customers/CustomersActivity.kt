@@ -45,6 +45,8 @@ class CustomersActivity : AppCompatActivity(), Logger {
                     it.reservedBy = customer.firstName + " " + customer.lastName
                 }
 
+                TablesActivity.syncReservations(TablesActivity.reservations)
+
                 finish()
             }
         })
