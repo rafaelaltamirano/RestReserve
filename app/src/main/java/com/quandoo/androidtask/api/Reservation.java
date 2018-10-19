@@ -2,7 +2,9 @@ package com.quandoo.androidtask.api;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Reservation {
+import java.io.Serializable;
+
+public class Reservation implements Serializable {
 
     @SerializedName("user_id")
     long userId;

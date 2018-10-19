@@ -13,7 +13,11 @@ import com.quandoo.androidtask.R;
 import com.quandoo.androidtask.api.Reservation;
 import com.quandoo.androidtask.api.RestaurantService;
 import com.quandoo.androidtask.api.Table;
+import com.quandoo.androidtask.utils.PersistanceUtil;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Single;
@@ -23,6 +27,10 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class TablesActivity extends AppCompatActivity implements Logger {
+
+    private static final String TABLES_FILE_NAME = "tables.bak";
+    private static final String RESERVATIONS_FILE_NAME = "reservations.bak";
+    private static final String CUSTOMERS_FILE_NAME = "customers.bak";
 
     private RecyclerView rv;
 
@@ -47,11 +55,25 @@ public class TablesActivity extends AppCompatActivity implements Logger {
         }
 
 
+        //try to read objects from file
+        tables = PersistanceUtil.readSerializable(TABLES_FILE_NAME);
+        reservations = PersistanceUtil.readSerializable(RESERVATIONS_FILE_NAME);
+        customers = PersistanceUtil.readSerializable(CUSTOMERS_FILE_NAME);
+
+        if (tables != null && reservations != null && customers != null) {
+            //Data is loaded from local storage. We can work with that.
+            rv.setAdapter(new TablesRvAdapter(tables,
+                    this::tablesClickListener));
+            return;
+        }
+
+
         // FIXME : >:) Muhahahahaha
         RestaurantService restaurantService = new RestaurantService.Creator().create();
         Single.zip(restaurantService.getTables(), restaurantService.getCustomers(), (tables1, customers1) -> {
             tables = tables1;
             customers = customers1;
+            writeCustomersToFile(customers1);
             return tables1;
         }).zipWith(restaurantService.getReservations(), (o, reservations1) -> reservations1)
                 .subscribeOn(Schedulers.io())
@@ -84,6 +106,9 @@ public class TablesActivity extends AppCompatActivity implements Logger {
 
                         rv.setAdapter(new TablesRvAdapter(tables,
                                 TablesActivity.this::tablesClickListener));
+
+                        syncTables();
+                        syncReservations(reservations);
                     }
 
                     @Override
@@ -92,6 +117,15 @@ public class TablesActivity extends AppCompatActivity implements Logger {
                     }
                 });
 
+    }
+
+    @NotNull
+    public static void syncReservations(@NotNull List<? extends Reservation> reservations) {
+        PersistanceUtil.saveSerializable(new ArrayList<>(reservations), RESERVATIONS_FILE_NAME);
+    }
+
+    private void writeCustomersToFile(List<Customer> customers) {
+        PersistanceUtil.saveSerializable(new ArrayList<>(customers), CUSTOMERS_FILE_NAME);
     }
 
     private void tablesClickListener(Table clickedTable) {
@@ -104,7 +138,7 @@ public class TablesActivity extends AppCompatActivity implements Logger {
 
                 //Free table
                 clickedTable.reservedBy = null;
-                refreshTables();
+                syncTables();
 
             }).setNegativeButton("No", null).show();
         } else {
@@ -116,16 +150,19 @@ public class TablesActivity extends AppCompatActivity implements Logger {
     @Override
     protected void onResume() {
         super.onResume();
-        refreshTables();
+        syncTables();
     }
 
-    private void refreshTables() {
+    private void syncTables() {
         // FIXME : >:) Muhahahahaha
         if (tables != null && rv.getAdapter() != null) {
             if ((rv.getAdapter() instanceof TablesRvAdapter)) {
                 TablesRvAdapter adapter = (TablesRvAdapter) rv.getAdapter();
                 adapter.notifyDataSetChanged();
             }
+
+            // Save tables into file
+            PersistanceUtil.saveSerializable(new ArrayList<>(tables), TABLES_FILE_NAME);
         }
     }
 
