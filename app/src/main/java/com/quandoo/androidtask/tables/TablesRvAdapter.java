@@ -54,8 +54,21 @@ class TablesRvAdapter extends RecyclerView.Adapter<TablesRvAdapter.TableViewHold
             viewHolder.reservingCustomerName.setTextColor(Color.GREEN);
         }
 
-        //TODO : set image depending on table shape
+
+        viewHolder.tableImage.setImageResource(getTableShapeImageResourceId(table.getShape()));
         viewHolder.itemView.setOnClickListener(v -> clickLstnr.onTableItemClick(table));
+    }
+
+    private int getTableShapeImageResourceId(String tableShape) {
+        switch (tableShape) {
+            case "circle":
+                return R.drawable.ic_circle;
+            case "square":
+                return R.drawable.ic_square;
+            default:
+                return R.drawable.ic_rectangle;
+        }
+
     }
 
     @Override
