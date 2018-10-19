@@ -9,9 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.quandoo.androidtask.api.Customer;
 import com.quandoo.androidtask.utils.Logger;
 import com.quandoo.androidtask.R;
 import com.quandoo.androidtask.api.Table;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -49,14 +51,30 @@ class TablesRvAdapter extends RecyclerView.Adapter<TablesRvAdapter.TableViewHold
         if (table.reservedBy != null) {
             viewHolder.reservingCustomerName.setText(table.reservedBy);
             viewHolder.reservingCustomerName.setTextColor(Color.RED);
+
+            //load reserving user image
+            Picasso.get().load(findUserImage(table.reservedBy)).into(viewHolder.avatarImage);
+            viewHolder.avatarImage.setVisibility(View.VISIBLE);
+
         } else {
             viewHolder.reservingCustomerName.setText("Free");
             viewHolder.reservingCustomerName.setTextColor(Color.GREEN);
+            viewHolder.avatarImage.setVisibility(View.INVISIBLE);
         }
 
 
         viewHolder.tableImage.setImageResource(getTableShapeImageResourceId(table.getShape()));
         viewHolder.itemView.setOnClickListener(v -> clickLstnr.onTableItemClick(table));
+    }
+
+    private String findUserImage(String userFirstNameLastName) {
+        for (Customer customer : TablesActivity.customers) {
+            String fullName = customer.getFirstName() + " " + customer.getLastName();
+            if (fullName.equals(userFirstNameLastName)) {
+                return customer.getImageUrl();
+            }
+        }
+        return null;
     }
 
     private int getTableShapeImageResourceId(String tableShape) {
@@ -81,6 +99,7 @@ class TablesRvAdapter extends RecyclerView.Adapter<TablesRvAdapter.TableViewHold
         final TextView tableId;
         final TextView reservingCustomerName;
         final ImageView tableImage;
+        final ImageView avatarImage;
 
         TableViewHolder(View itemView) {
             super(itemView);
@@ -88,6 +107,7 @@ class TablesRvAdapter extends RecyclerView.Adapter<TablesRvAdapter.TableViewHold
             tableId = itemView.findViewById(R.id.tableId);
             reservingCustomerName = itemView.findViewById(R.id.reservingCustomerName);
             tableImage = itemView.findViewById(R.id.tableImageView);
+            avatarImage = itemView.findViewById(R.id.avatarImageView);
         }
     }
 }
