@@ -1,6 +1,7 @@
 package com.quandoo.androidtask.tables;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -41,9 +42,7 @@ public class TablesActivity extends AppCompatActivity implements Logger {
 
         if (tables != null) {
             rv.setAdapter(new TablesRvAdapter(tables,
-                    clickedTable ->
-                            startActivity(CustomersActivity
-                                    .createStartingIntent(clickedTable, TablesActivity.this))));
+                    this::tablesClickListener));
             return;
         }
 
@@ -84,9 +83,7 @@ public class TablesActivity extends AppCompatActivity implements Logger {
                         });
 
                         rv.setAdapter(new TablesRvAdapter(tables,
-                                clickedTable ->
-                                        startActivity(CustomersActivity
-                                                .createStartingIntent(clickedTable, TablesActivity.this))));
+                                TablesActivity.this::tablesClickListener));
                     }
 
                     @Override
@@ -97,10 +94,32 @@ public class TablesActivity extends AppCompatActivity implements Logger {
 
     }
 
+    private void tablesClickListener(Table clickedTable) {
+        //show dialog for reserved table
+        if (clickedTable.reservedBy != null) {
+
+            //show dialog that removes the reservation
+            AlertDialog.Builder builder = new AlertDialog.Builder(TablesActivity.this);
+            builder.setMessage("Do you want to free the table?").setPositiveButton("Yes", (dialog, which) -> {
+
+                //Free table
+                clickedTable.reservedBy = null;
+                refreshTables();
+
+            }).setNegativeButton("No", null).show();
+        } else {
+            startActivity(CustomersActivity
+                    .createStartingIntent(clickedTable, TablesActivity.this));
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
+        refreshTables();
+    }
 
+    private void refreshTables() {
         // FIXME : >:) Muhahahahaha
         if (tables != null && rv.getAdapter() != null) {
             if ((rv.getAdapter() instanceof TablesRvAdapter)) {
