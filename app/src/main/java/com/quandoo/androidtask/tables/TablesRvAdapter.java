@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-class TablesRvAdapter extends RecyclerView.Adapter<TablesRvAdapter.TableViewHolder> implements Logger {
+public class TablesRvAdapter extends RecyclerView.Adapter<TablesRvAdapter.TableViewHolder> implements Logger {
 
 
     interface TableClickListener {
@@ -94,7 +94,7 @@ class TablesRvAdapter extends RecyclerView.Adapter<TablesRvAdapter.TableViewHold
         return tables.size();
     }
 
-    static class TableViewHolder extends RecyclerView.ViewHolder {
+    public static class TableViewHolder extends RecyclerView.ViewHolder {
 
         final TextView tableId;
         final TextView reservingCustomerName;
