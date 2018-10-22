@@ -1,5 +1,6 @@
 package com.quandoo.androidtask.tables;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.quandoo.androidtask.api.Customer;
 import com.quandoo.androidtask.customers.CustomersActivity;
+import com.quandoo.androidtask.utils.AppStatus;
 import com.quandoo.androidtask.utils.Logger;
 import com.quandoo.androidtask.R;
 import com.quandoo.androidtask.api.Reservation;
@@ -43,6 +45,7 @@ public class TablesActivity extends AppCompatActivity implements Logger {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("Tables");
 
         rv = findViewById(R.id.recycler_view);
         rv.setLayoutManager(new LinearLayoutManager(this));
@@ -51,6 +54,20 @@ public class TablesActivity extends AppCompatActivity implements Logger {
         if (tables != null) {
             rv.setAdapter(new TablesRvAdapter(tables,
                     this::tablesClickListener));
+            return;
+        }
+
+
+        //close the app when no internet
+        if(!AppStatus.getInstance(getApplicationContext()).isOnline()){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("No internet connection!")
+                    .setCancelable(false)
+                    .setPositiveButton("Close App", (dialog, id) -> {
+                        finish();
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
             return;
         }
 
