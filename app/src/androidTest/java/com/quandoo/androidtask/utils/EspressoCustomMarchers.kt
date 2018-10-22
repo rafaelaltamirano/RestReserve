@@ -1,4 +1,4 @@
-package com.quandoo.androidtask
+package com.quandoo.androidtask.utils
 
 import android.support.test.espresso.PerformException
 import android.support.test.espresso.UiController
@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.TextView
+import com.quandoo.androidtask.R
 import com.quandoo.androidtask.tables.TablesRvAdapter
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.Description

@@ -1,4 +1,4 @@
-package com.quandoo.androidtask
+package com.quandoo.androidtask.utils
 
 import android.content.res.Resources
 import android.support.v7.widget.RecyclerView
