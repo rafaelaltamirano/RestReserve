@@ -1,7 +1,11 @@
 package com.quandoo.androidtask
 
 import android.content.Intent
+import android.os.AsyncTask
 import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.ViewAction
+import android.support.test.espresso.action.ViewActions
+import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.contrib.RecyclerViewActions
 import android.support.test.espresso.matcher.ViewMatchers.*
@@ -11,19 +15,16 @@ import android.support.test.runner.AndroidJUnit4
 import android.support.v7.widget.RecyclerView
 import com.quandoo.androidtask.EspressoCustomMarchers.Companion.first
 import com.quandoo.androidtask.EspressoCustomMarchers.Companion.withHolderTablesView
+import com.quandoo.androidtask.EspressoCustomMarchers.Companion.withRecyclerView
 import com.quandoo.androidtask.tables.TablesActivity
+import io.reactivex.plugins.RxJavaPlugins
+import io.reactivex.schedulers.Schedulers
+import org.hamcrest.CoreMatchers.not
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import android.os.AsyncTask
-import android.support.test.espresso.action.ViewActions.click
-import com.quandoo.androidtask.tables.TablesRvAdapter
-import io.reactivex.schedulers.Schedulers
-import io.reactivex.Scheduler
-import io.reactivex.plugins.RxJavaPlugins
-import org.hamcrest.CoreMatchers.allOf
 
 
 /**
@@ -83,28 +84,36 @@ class AcceptanceTest {
 
         //FIXME : Clicks the wrong item !
         //User clicks on free table
-        onView(withId(R.id.recycler_view))
-                .perform(RecyclerViewActions.scrollToHolder(first(withHolderTablesView("Free"))), click())
+//        onView(withId(R.id.recycler_view))
+//                .perform(RecyclerViewActions.scrollToHolder(first(withHolderTablesView("Free"))), click())
 
+        onView(first(hasDescendant(withText("Free")))).perform(click())
+
+
+//        onView(withId(R.id.recycler_view))
+//                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
 
         //THEN :
 
-
         //Screen with customers appear
-//        EspressoCustomMarchers.waitForView(R.id.recycler_view,2000)
-//
-//                When :
-//
-//        User clicks on a user
-//
-//        Then :
-//
-//        Screen with users tables appear
-//        Previously selected table is marked as reserved by a user name
+        onView(withText("Customers")).check(matches(isDisplayed()))
 
-        // Check all views are displayed
+        //WHEN :
 
-//        onView(withId(R.id.recyclerView)).check(matches(isDisplayed()))
+        //User clicks on any user
+        onView(withId(R.id.recycler_view))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+
+        //THEN :
+
+        //Screen with users tables appear
+        onView(withText("Tables")).check(matches(isDisplayed()))
+
+
+        //Previously selected table is marked as reserved by a user name
+        onView(withRecyclerView(R.id.recycler_view).atPosition(0))
+                .check(matches(not(hasDescendant(withText("Free")))))
+
     }
 
     fun wait(seconds: Int = 1) {
