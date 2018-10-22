@@ -17,6 +17,7 @@ import com.quandoo.androidtask.EspressoCustomMarchers.Companion.first
 import com.quandoo.androidtask.EspressoCustomMarchers.Companion.withHolderTablesView
 import com.quandoo.androidtask.EspressoCustomMarchers.Companion.withRecyclerView
 import com.quandoo.androidtask.tables.TablesActivity
+import com.quandoo.androidtask.tables.TablesRvAdapter
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
 import org.hamcrest.CoreMatchers.not
@@ -46,8 +47,6 @@ class AcceptanceTest {
 
     @Before
     fun setup() {
-
-        //TODO : Mock data
 
         //make espresso wait for RXJava
         RxJavaPlugins.setIoSchedulerHandler { Schedulers.from(AsyncTask.THREAD_POOL_EXECUTOR) }
@@ -79,18 +78,15 @@ class AcceptanceTest {
         onView(withId(R.id.recycler_view))
                 .perform(RecyclerViewActions.scrollToHolder(first(withHolderTablesView("Free"))))
 
+
+        //Hacky way of getting a position of desired element
+        val freeTablePosition = TablesActivity.tables.indexOfFirst { table -> table.reservedBy == null }
+
         //WHEN :
 
-
-        //FIXME : Clicks the wrong item !
         //User clicks on free table
-//        onView(withId(R.id.recycler_view))
-//                .perform(RecyclerViewActions.scrollToHolder(first(withHolderTablesView("Free"))), click())
-
-
-
         onView(withId(R.id.recycler_view))
-                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(freeTablePosition, click()))
 
         //THEN :
 
@@ -101,7 +97,7 @@ class AcceptanceTest {
 
         //User clicks on any user
         onView(withId(R.id.recycler_view))
-                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(freeTablePosition, click()))
 
         //THEN :
 
@@ -110,13 +106,9 @@ class AcceptanceTest {
 
 
         //Previously selected table is marked as reserved by a user name
-        onView(withRecyclerView(R.id.recycler_view).atPosition(0))
+        onView(withRecyclerView(R.id.recycler_view).atPosition(freeTablePosition))
                 .check(matches(not(hasDescendant(withText("Free")))))
 
-    }
-
-    fun wait(seconds: Int = 1) {
-        Thread.sleep(seconds * 1000L)
     }
 
 }
