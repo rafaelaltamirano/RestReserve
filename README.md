@@ -47,4 +47,59 @@ Main brunch of this project is protected and you cannot modify it.
   - We welcome RxJava/RxKotlin
 
 ## Test scenarios
-TBD
+
+#### Open app in offline mode first time
+  - Given
+    - App is open without any internet connection
+    - App is opened the first time after fresh install
+  - When 
+    - First screen appears
+  - Then
+    - No internet connection dialog is visible
+
+#### Open app in offline mode in cache mode
+  - Given
+    - App is open without any internet connection
+    - App is opened after data was presented at least once
+  - When 
+    - First screen appears
+  - Then
+    - List of tables is visible and populated with tables
+
+#### Table reservation 
+  - Given
+    - App is open 
+    - List of tables visible
+    - There is at least one free table visible
+  - When 
+    - User clicks on free table
+  - Then
+    - Screen with users appear
+  - When 
+    - User clicks on a user
+  - Then
+    - Screen with users tables appear
+    - Previously selected table is marked as reserved by a user name
+
+#### Table reservation cancellation
+  - Given
+    - App is open 
+    - List of tables visible
+    - There is at least one reserved table
+  - When 
+    - User clicks on a reserved table
+  - Then
+    - Confirmation dialog appears
+  - When 
+    - User clicks on a accept button
+  - Then
+    - Previously reserved table is marked as free
+
+#### Reserved table visual feedback
+  - Given
+    - There is at least one reserved table
+  - When 
+    - Table appears
+  - Then
+    - Make sure reserved table has a name of reserving customer
+    - Make sure reserved table has an image of reserving customer
