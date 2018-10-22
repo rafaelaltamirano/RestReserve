@@ -87,11 +87,10 @@ class AcceptanceTest {
 //        onView(withId(R.id.recycler_view))
 //                .perform(RecyclerViewActions.scrollToHolder(first(withHolderTablesView("Free"))), click())
 
-        onView(first(hasDescendant(withText("Free")))).perform(click())
 
 
-//        onView(withId(R.id.recycler_view))
-//                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        onView(withId(R.id.recycler_view))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
 
         //THEN :
 
