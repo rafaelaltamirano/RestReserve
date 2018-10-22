@@ -81,19 +81,11 @@ class AcceptanceTest {
         //WHEN :
 
 
+        //FIXME : Clicks the wrong item !
         //User clicks on free table
         onView(withId(R.id.recycler_view))
                 .perform(RecyclerViewActions.scrollToHolder(first(withHolderTablesView("Free"))), click())
 
-
-//        onView(withId(R.id.recycler_view))
-//                .perform(RecyclerViewActions.actionOnItemAtPosition(0))
-
-
-        //User clicks on free table
-//        onView(allOf(hasDescendant(withText("Free")), isDisplayed())).perform(click())
-
-        wait()
 
         //THEN :
 
