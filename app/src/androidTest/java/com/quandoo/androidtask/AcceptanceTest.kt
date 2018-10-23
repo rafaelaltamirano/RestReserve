@@ -6,18 +6,28 @@ import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.contrib.RecyclerViewActions
+import android.support.test.espresso.matcher.BoundedMatcher
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.filters.LargeTest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.support.v7.widget.RecyclerView
+import android.view.View
+import android.view.ViewGroup
 import com.quandoo.androidtask.utils.EspressoCustomMarchers.Companion.first
 import com.quandoo.androidtask.utils.EspressoCustomMarchers.Companion.withHolderTablesView
 import com.quandoo.androidtask.utils.EspressoCustomMarchers.Companion.withRecyclerView
 import com.quandoo.androidtask.tables.TablesActivity
+import com.quandoo.androidtask.tables.TablesActivity.*
+import com.quandoo.androidtask.utils.EspressoCustomMarchers.Companion.waitForView
+import com.quandoo.androidtask.utils.PersistanceUtil
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
 import org.hamcrest.CoreMatchers.not
+import org.hamcrest.Description
+import org.hamcrest.Matcher
+import org.hamcrest.Matchers
+import org.hamcrest.TypeSafeMatcher
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -42,6 +52,11 @@ class AcceptanceTest {
     @Before
     fun setup() {
 
+        //clear cached state
+        PersistanceUtil.removeSerializable(TABLES_FILE_NAME)
+        PersistanceUtil.removeSerializable(CUSTOMERS_FILE_NAME)
+        PersistanceUtil.removeSerializable(RESERVATIONS_FILE_NAME)
+
         //make espresso wait for RXJava
         RxJavaPlugins.setIoSchedulerHandler { Schedulers.from(AsyncTask.THREAD_POOL_EXECUTOR) }
         RxJavaPlugins.setComputationSchedulerHandler { Schedulers.from(AsyncTask.THREAD_POOL_EXECUTOR) }
@@ -58,7 +73,7 @@ class AcceptanceTest {
 
 
     @Test
-    fun tableReservationTest() {
+    fun reserveTableTest() {
 
         //GIVEN :
 
@@ -102,6 +117,48 @@ class AcceptanceTest {
         //Previously selected table is marked as reserved by a user name
         onView(withRecyclerView(R.id.recycler_view).atPosition(freeTablePosition))
                 .check(matches(not(hasDescendant(withText("Free")))))
+
+    }
+
+    @Test
+    fun removeReservationTest() {
+
+        //GIVEN :
+
+        //App is open
+        onView(withText("Tables")).check(matches(isDisplayed()))
+
+        // List of tables visible
+        onView(withId(R.id.recycler_view)).check(matches(isDisplayed()))
+
+        //There is at least one reserved table
+        onView(withId(R.id.recycler_view))
+                .perform(RecyclerViewActions.scrollToHolder(first(not(withHolderTablesView("Free")))))
+
+
+        //FIXME : Hacky way of getting a position of desired element
+        val reservedTablePosition = TablesActivity.tables.indexOfFirst { table -> table.reservedBy != null }
+
+        //WHEN :
+
+        //User clicks on a reserved table
+        onView(withId(R.id.recycler_view))
+                .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(reservedTablePosition, click()))
+
+        //THEN :
+
+        //Confirmation dialog appears
+        onView(withText("Do you want to free the table?")).check(matches(isDisplayed()))
+
+        //WHEN :
+
+        //User clicks on a accept button
+        onView(withText("Yes")).check(matches(isDisplayed())).perform(click())
+
+
+        //Previously reserved table is marked as free
+        onView(withRecyclerView(R.id.recycler_view).atPosition(reservedTablePosition))
+                .check(matches(hasDescendant(withText("Free"))))
 
     }
 
