@@ -30,9 +30,9 @@ import io.reactivex.schedulers.Schedulers;
 
 public class TablesActivity extends AppCompatActivity implements Logger {
 
-    private static final String TABLES_FILE_NAME = "tables.bak";
-    private static final String RESERVATIONS_FILE_NAME = "reservations.bak";
-    private static final String CUSTOMERS_FILE_NAME = "customers.bak";
+    public static final String TABLES_FILE_NAME = "tables.bak";
+    public static final String RESERVATIONS_FILE_NAME = "reservations.bak";
+    public static final String CUSTOMERS_FILE_NAME = "customers.bak";
 
     private RecyclerView rv;
 

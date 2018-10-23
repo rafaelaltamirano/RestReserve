@@ -65,11 +65,10 @@ public class PersistanceUtil {
     /**
      * Removes a specified file.
      *
-     * @param context The application context.
      * @param filename The name of the file.
      */
 
-    public static void removeSerializable(Context context, String filename) {
-        context.deleteFile(filename);
+    public static void removeSerializable(String filename) {
+        App.instance.deleteFile(filename);
     }
 }

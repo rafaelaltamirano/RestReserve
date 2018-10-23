@@ -48,7 +48,7 @@ Main brunch of this project is protected and you cannot modify it.
 
 ## Test scenarios
 
-#### Open app in offline mode first time
+#### Open app in offline mode first time [Not Implemented]
   - Given
     - App is open without any internet connection
     - App is opened the first time after fresh install
@@ -57,7 +57,7 @@ Main brunch of this project is protected and you cannot modify it.
   - Then
     - No internet connection dialog is visible
 
-#### Open app in offline mode in cache mode
+#### Open app in offline mode in cache mode [Not Implemented]
   - Given
     - App is open without any internet connection
     - App is opened after data was presented at least once
@@ -66,7 +66,7 @@ Main brunch of this project is protected and you cannot modify it.
   - Then
     - List of tables is visible and populated with tables
 
-#### Table reservation 
+#### Table reservation [Implemented]
   - Given
     - App is open 
     - List of tables visible
@@ -81,7 +81,7 @@ Main brunch of this project is protected and you cannot modify it.
     - Screen with users tables appear
     - Previously selected table is marked as reserved by a user name
 
-#### Table reservation cancellation
+#### Table reservation cancellation [Implemented]
   - Given
     - App is open 
     - List of tables visible
@@ -95,7 +95,7 @@ Main brunch of this project is protected and you cannot modify it.
   - Then
     - Previously reserved table is marked as free
 
-#### Reserved table visual feedback
+#### Reserved table visual feedback [Not Implemented]
   - Given
     - There is at least one reserved table
   - When 
