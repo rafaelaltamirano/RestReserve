@@ -34,7 +34,7 @@ Main brunch of this project is protected and you cannot modify it.
   - Send us a link to the repository, together with private ssh key that allows access (settings > repository > deploy keys).
   - Submit the link to your private repository along with an ssh key to this email : assessment.submittal@quandoo.com
   - Please do not submit or post your solution anywhere else !
-  - **We REALLY want to see how you implement your tests ! ***
+  - **We REALLY want to see how you implement your tests ! **
 
 
 
