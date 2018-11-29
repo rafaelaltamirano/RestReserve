@@ -31,7 +31,7 @@ Main brunch of this project is protected and you cannot modify it.
   - Create a new branch from **master**.
   - Refactor the code gradually by submitting new descriptive commits (we will look into your commit messages).
   - We expect to see missing instrumentation **TESTS** along with unit **TESTS**.
-  - Send us a link to the repository, together with **private ssh key that allows access (settings > repository > deploy keys)**.
+  - Send us a link to the repository, together with **private ssh key that allows access (settings > repository > deploy keys)**.Please be careful about this as it saves us a lot of time if done properly - We need an unencrypted private key; the public one you set in gitlab deploy keys settings.
   - Submit the link to your private repository along with an ssh key to this email : assessment.submittal@quandoo.com
   - Please do not submit or post your solution anywhere else !
   - **We REALLY want to see how you implement your tests !**
