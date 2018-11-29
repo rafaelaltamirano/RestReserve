@@ -25,7 +25,7 @@ Once data is downloaded, application will continue working with the data in an o
 
 ## Administrative instructions
 
-Main brunch of this project is protected and you cannot modify it.
+Main branch of this project is protected and you cannot modify it.
 
   - Please fork this project into a private GitLab repository.
   - Create a new branch from **master**.
