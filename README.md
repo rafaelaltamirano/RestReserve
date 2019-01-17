@@ -31,7 +31,7 @@ Main branch of this project is protected and you cannot modify it.
   - Create a new branch from **master**.
   - Refactor the code gradually by submitting new descriptive commits (we will look into your commit messages).
   - We expect to see missing instrumentation **TESTS** along with unit **TESTS**.
-  - Add gitlab user with a name @sheldon.ci as a member to your project.
+  - Add gitlab user with a name @sheldon.ci as a member to your project. Please give this user permission to be a developer , we might want to comment on your solution.
   - Submit the link to your private repository to this email : assessment.submittal@quandoo.com
   - Please do not submit or post your solution anywhere else !
   - **We REALLY want to see how you implement your tests !**
