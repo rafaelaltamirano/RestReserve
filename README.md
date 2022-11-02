@@ -1,8 +1,8 @@
-# Android Engineer Coding Challenge
+# Mobile Android Engineer Coding Challenge
 
 ## Introduction
 
-Thank you for applying for the Android Engineer vacancy at Quandoo. In efforts to have an understanding of your skill level, we would like to proceed with an assessment that will give you a chance to show Quandoo that you are a battle proven Engineer!
+Thank you for applying for the Mobile Android Engineer vacancy at Quandoo. In efforts to have an understanding of your skill level, we would like to proceed with an assessment that will give you a chance to show Quandoo that you are a battle proven Engineer!
 
 ## Task description
 In this task we will kindly ask you to improve an existing codebase and make it readable, testable and maintainable up to modern standards. 
@@ -40,12 +40,13 @@ Main branch of this project is protected and you cannot modify it.
 
 ## Tech stack we want you to use
   - Retrofit
-  - Dagger 2 
+  - Hilt/Dagger 2 
   - We would love you to use one of the following architectures 
+    - Unidirectional Data Flow
     - Clean Architecture
     - MVVM
-    - MVP
   - We welcome RxJava/RxKotlin
+  - Using Jetpack Compose is a plus
 
 ## Test scenarios
 
