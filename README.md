@@ -36,8 +36,6 @@ Main branch of this project is protected and you cannot modify it.
   - Please do not submit or post your solution anywhere else !
   - **We REALLY want to see how you implement your tests !**
 
-
-
 ## Tech stack we want you to use
   - Retrofit
   - Hilt/Dagger 2 
@@ -47,6 +45,11 @@ Main branch of this project is protected and you cannot modify it.
     - MVVM
   - We welcome RxJava/RxKotlin
   - Using Jetpack Compose is a plus
+
+### Submitting your solution
+- Fork it to a **[!]**private**[!]** gitlab repository (go to `Settings -> General -> Visibility, project features, permissions -> Project visibility`).
+- Share the project with gitlab user *quandoo_recruitment_task* (go to `Settings -> Members -> Invite member`, find the user in `Select members to invite` and set `Choose a role permission` to `Developer`)
+- Send us an **ssh** clone link to the repository.
 
 ## Test scenarios
 
