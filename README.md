@@ -27,14 +27,14 @@ Once data is downloaded, application will continue working with the data in an o
 
 Main branch of this project is protected and you cannot modify it.
 
-  - Please fork this project into a private GitLab repository.
+  - Please fork this project to a **[!]**private**[!]** gitlab repository (go to `Settings -> General -> Visibility, project features, permissions -> Project visibility`).
   - Create a new branch from **master**.
   - Refactor the code gradually by submitting new descriptive commits (we will look into your commit messages).
-  - We expect to see missing instrumentation **TESTS** along with unit **TESTS**.
-  - Add gitlab user with a name @sheldon.ci as a member to your project. Please give this user permission to be a developer , we might want to comment on your solution.
-  - Submit the link to your private repository to this email : assessment.submittal@quandoo.com
-  - Please do not submit or post your solution anywhere else !
-  - **We REALLY want to see how you implement your tests !**
+  - We expect to see missing instrumentation **TESTS** along with unit **TESTS**
+  - Share the project with gitlab user *quandoo_recruitment_task* (go to `Settings -> Members -> Invite member`, find the user in `Select members to invite` and set `Choose a role permission` to `Developer`)
+  - Send us an **ssh** clone link to the repository.
+  - Please do not submit or post your solution anywhere else!
+  - **We REALLY want to see how you implement your tests!**
 
 ## Tech stack we want you to use
   - Retrofit
@@ -45,11 +45,6 @@ Main branch of this project is protected and you cannot modify it.
     - MVVM
   - We welcome RxJava/RxKotlin
   - Using Jetpack Compose is a plus
-
-### Submitting your solution
-- Fork it to a **[!]**private**[!]** gitlab repository (go to `Settings -> General -> Visibility, project features, permissions -> Project visibility`).
-- Share the project with gitlab user *quandoo_recruitment_task* (go to `Settings -> Members -> Invite member`, find the user in `Select members to invite` and set `Choose a role permission` to `Developer`)
-- Send us an **ssh** clone link to the repository.
 
 ## Test scenarios
 
