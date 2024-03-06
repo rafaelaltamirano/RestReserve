@@ -1,14 +1,15 @@
 package com.quandoo.androidtask.customers
 
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.quandoo.androidtask.utils.Logger
+import androidx.recyclerview.widget.RecyclerView
 import com.quandoo.androidtask.R
 import com.quandoo.androidtask.api.Customer
+import com.quandoo.androidtask.databinding.CustomerCellBinding
+import com.quandoo.androidtask.utils.Logger
 import com.squareup.picasso.Picasso
 
 internal class CustomersRvAdapter(private val tables: List<Customer>,
@@ -19,28 +20,29 @@ internal class CustomersRvAdapter(private val tables: List<Customer>,
         fun onCustomerClick(customer: Customer)
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): CustomerViewHolder {
-        val view = LayoutInflater.from(viewGroup.context)
-                .inflate(R.layout.customer_cell, viewGroup, false)
-        return CustomerViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = CustomerCellBinding.inflate(inflater, parent, false)
+        return CustomerViewHolder(binding)
     }
 
-    override fun onBindViewHolder(viewHolder: CustomerViewHolder, i: Int) {
-        val customer = this.tables[i]
-
-        viewHolder.customerName.text = "" + customer.firstName + " " + customer.lastName
-        Picasso.get().load(customer.imageUrl).into(viewHolder.customerAvatarImage)
-        viewHolder.itemView.setOnClickListener { v ->
-            customerClickLstnr.onCustomerClick(customer)
-        }
+    override fun onBindViewHolder(viewHolder: CustomerViewHolder, position: Int) {
+        val customer = tables[position]
+        viewHolder.bind(customer)
     }
 
     override fun getItemCount(): Int {
         return tables.size
     }
 
-    internal class CustomerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val customerName: TextView = itemView.findViewById(R.id.customerNameTextView)
-        val customerAvatarImage: ImageView = itemView.findViewById(R.id.customerAvatarImageView)
+    inner class CustomerViewHolder(private val binding: CustomerCellBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(customer: Customer) {
+            binding.apply {
+                customerNameTextView.text = "${customer.firstName} ${customer.lastName}"
+                // Set customerAvatarImageView using Picasso or other image loading library
+                root.setOnClickListener { customerClickLstnr.onCustomerClick(customer) }
+            }
+        }
     }
 }

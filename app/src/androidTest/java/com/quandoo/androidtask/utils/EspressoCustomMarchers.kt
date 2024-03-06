@@ -1,17 +1,18 @@
 package com.quandoo.androidtask.utils
 
-import android.support.test.espresso.PerformException
-import android.support.test.espresso.UiController
-import android.support.test.espresso.ViewAction
-import android.support.test.espresso.matcher.BoundedMatcher
-import android.support.test.espresso.matcher.ViewMatchers.isRoot
-import android.support.test.espresso.matcher.ViewMatchers.withId
-import android.support.test.espresso.util.HumanReadables
-import android.support.test.espresso.util.TreeIterables
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
+
 import android.view.View
 import android.widget.TextView
+import android.widget.Toolbar
+import androidx.recyclerview.widget.RecyclerView
+import androidx.test.espresso.PerformException
+import androidx.test.espresso.UiController
+import androidx.test.espresso.ViewAction
+import androidx.test.espresso.matcher.BoundedMatcher
+import androidx.test.espresso.matcher.ViewMatchers.isRoot
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.util.HumanReadables
+import androidx.test.espresso.util.TreeIterables
 import com.quandoo.androidtask.R
 import com.quandoo.androidtask.tables.TablesRvAdapter
 import org.hamcrest.CoreMatchers.`is`

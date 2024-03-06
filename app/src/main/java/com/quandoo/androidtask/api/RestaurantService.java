@@ -1,6 +1,6 @@
 package com.quandoo.androidtask.api;
 
-import com.quandoo.androidtask.BuildConfig;
+import com.squareup.picasso.BuildConfig;
 
 import java.util.List;
 

@@ -1,18 +1,19 @@
 package com.quandoo.androidtask.tables;
 
 import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.quandoo.androidtask.api.Customer;
-import com.quandoo.androidtask.utils.Logger;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.quandoo.androidtask.R;
+import com.quandoo.androidtask.api.Customer;
 import com.quandoo.androidtask.api.Table;
+import com.quandoo.androidtask.utils.Logger;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

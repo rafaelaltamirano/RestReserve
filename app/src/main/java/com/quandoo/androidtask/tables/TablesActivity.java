@@ -1,20 +1,20 @@
 package com.quandoo.androidtask.tables;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
-import com.quandoo.androidtask.api.Customer;
-import com.quandoo.androidtask.customers.CustomersActivity;
-import com.quandoo.androidtask.utils.AppStatus;
-import com.quandoo.androidtask.utils.Logger;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.quandoo.androidtask.R;
+import com.quandoo.androidtask.api.Customer;
 import com.quandoo.androidtask.api.Reservation;
 import com.quandoo.androidtask.api.RestaurantService;
 import com.quandoo.androidtask.api.Table;
+import com.quandoo.androidtask.customers.CustomersActivity;
+import com.quandoo.androidtask.utils.AppStatus;
+import com.quandoo.androidtask.utils.Logger;
 import com.quandoo.androidtask.utils.PersistanceUtil;
 
 import org.jetbrains.annotations.NotNull;
