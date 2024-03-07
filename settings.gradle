@@ -15,3 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Quandoo_Challenge"
 include(":app")
+include ':domain'
+include ':data'
