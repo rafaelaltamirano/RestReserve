@@ -1,7 +1,10 @@
 package com.quandoo.domain
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "tables")
 data class Table(
     val shape: String,
-    val id: Long,
-    val reservedBy: String? = null
+    @PrimaryKey(autoGenerate = false) val id: Long,
 )

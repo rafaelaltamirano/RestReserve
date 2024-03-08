@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.quandoo.androidtask.R
 import com.quandoo.androidtask.api.Customer
 import com.quandoo.androidtask.api.Reservation
 import com.quandoo.androidtask.api.Table
@@ -36,7 +35,13 @@ class CustomersActivity : AppCompatActivity(), Logger {
                 //Reserve table
                 TablesActivity.tables.find { table -> table.id == selectedTableId }?.let {
                     //create reservation
-                    TablesActivity.reservations.add(Reservation(customer.id, it.id, customer.id + it.id))
+                    TablesActivity.reservations.add(
+                        Reservation(
+                            customer.id,
+                            it.id,
+                            customer.id + it.id
+                        )
+                    )
                     it.reservedBy = customer.firstName + " " + customer.lastName
                 }
 

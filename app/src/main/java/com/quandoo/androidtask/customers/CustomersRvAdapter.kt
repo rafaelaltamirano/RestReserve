@@ -1,16 +1,11 @@
 package com.quandoo.androidtask.customers
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.quandoo.androidtask.R
 import com.quandoo.androidtask.api.Customer
 import com.quandoo.androidtask.databinding.CustomerCellBinding
 import com.quandoo.androidtask.utils.Logger
-import com.squareup.picasso.Picasso
 
 internal class CustomersRvAdapter(private val tables: List<Customer>,
                                   private val customerClickLstnr: CustomerClickListener) :

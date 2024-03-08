@@ -9,7 +9,7 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.quandoo.androidtask.navigation.Route
+import com.quandoo.androidtask.ui.navigation.Route
 import com.quandoo.androidtask.ui.theme.QuandooChallengeTheme
 import dagger.hilt.android.AndroidEntryPoint
 

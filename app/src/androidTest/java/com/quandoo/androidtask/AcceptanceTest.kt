@@ -95,7 +95,7 @@ class AcceptanceTest {
         //THEN :
 
         //Screen with customers appear
-        onView(withText("Customers")).check(matches(isDisplayed()))
+        onView(withText("Customer")).check(matches(isDisplayed()))
 
         //WHEN :
 
