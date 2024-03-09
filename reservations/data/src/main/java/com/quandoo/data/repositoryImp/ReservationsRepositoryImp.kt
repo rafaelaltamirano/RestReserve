@@ -1,12 +1,9 @@
 package com.quandoo.data.repositoryImp
 
 import com.quandoo.data.api.RestaurantApi
-import com.quandoo.data.dao.CustomersDao
-import com.example.domain.Customer
-import com.example.domain.repository.CustomersRepository
 import com.example.domain.repository.ReservationsRepository
 import com.quandoo.data.dao.ReservationsDao
-import com.quandoo.domain.Reservation
+import com.example.domain.model.Reservation
 
 class ReservationsRepositoryImp(
     private val dao: ReservationsDao,

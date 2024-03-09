@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.quandoo.domain.Reservation
+import com.example.domain.model.Reservation
 
 @Dao
 interface ReservationsDao {

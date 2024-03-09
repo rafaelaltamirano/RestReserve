@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.domain.Table
+import com.example.domain.model.Table
 
 @Dao
 interface TablesDao {

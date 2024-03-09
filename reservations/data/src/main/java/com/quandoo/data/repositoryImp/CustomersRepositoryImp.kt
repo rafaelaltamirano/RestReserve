@@ -2,7 +2,7 @@ package com.quandoo.data.repositoryImp
 
 import com.quandoo.data.api.RestaurantApi
 import com.quandoo.data.dao.CustomersDao
-import com.example.domain.Customer
+import com.example.domain.model.Customer
 import com.example.domain.repository.CustomersRepository
 
 class CustomersRepositoryImp(

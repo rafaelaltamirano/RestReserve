@@ -14,9 +14,29 @@ android {
             excludes += "/META-INF/*"
         }
     }
+
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = Compose.composeCompilerVersion
+    }
 }
 
 dependencies {
+    implementation(Compose.ui)
+    implementation(Compose.material)
+    implementation(Compose.runtime)
+    implementation(Compose.activityCompose)
+    implementation(platform(Compose.composeBom))
+    implementation(Compose.composeGraphic)
+    implementation(Compose.uiToolingPreview)
+    implementation(Compose.hiltNavigationCompose)
+    implementation(Compose.viewModelCompose)
 
-
+    implementation(Coil.coilCompose)
+    implementation(Coroutines.coroutinesCore)
+    implementation(Coroutines.coroutinesAndroid)
+    implementation(project(":reservations:domain"))
+    implementation(project(":reservations:data"))
 }

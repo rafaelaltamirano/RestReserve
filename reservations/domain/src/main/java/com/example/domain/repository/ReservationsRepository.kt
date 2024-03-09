@@ -1,7 +1,6 @@
 package com.example.domain.repository
 
-import com.example.domain.LocalSource
-import com.quandoo.domain.Reservation
+import com.example.domain.model.Reservation
 
 interface ReservationsRepository : LocalSource<List<Reservation>> {
 

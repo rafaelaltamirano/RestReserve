@@ -3,7 +3,7 @@ package com.quandoo.data.repositoryImp
 import com.example.domain.repository.TablesRepository
 import com.quandoo.data.api.RestaurantApi
 import com.quandoo.data.dao.TablesDao
-import com.example.domain.Table
+import com.example.domain.model.Table
 
 class TablesRepositoryImp(
     private val dao: TablesDao,
