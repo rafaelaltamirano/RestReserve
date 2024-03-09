@@ -22,8 +22,10 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
-            <option value="$PROJECT_DIR$/data" />
-            <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/reservations" />
+            <option value="$PROJECT_DIR$/reservations/data" />
+            <option value="$PROJECT_DIR$/reservations/domain" />
+            <option value="$PROJECT_DIR$/reservations/presentation" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

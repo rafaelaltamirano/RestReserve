@@ -29,6 +29,6 @@ object Testing {
     const val testRunner = "androidx.test:runner:$testRunnerVersion"
 
     private const val espressoVersion = "3.5.1"
-    const val espressoCore = "androidx.test.espresso:espresso-core:$testRunnerVersion"
-    const val espressoContrib = "androidx.test.espresso:espresso-contrib:$testRunnerVersion"
+    const val espressoCore = "androidx.test.espresso:espresso-core:$espressoVersion"
+    const val espressoContrib = "androidx.test.espresso:espresso-contrib:$espressoVersion"
 }
