@@ -7,12 +7,18 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface RestaurantApi {
-        @GET("/quandoo-assessment/tables.json")
+        @GET("quandoo-assessment/tables.json")
         suspend fun getTables(): Response<List<Table>>
 
-        @GET("/quandoo-assessment/customers.json")
+        @GET("quandoo-assessment/customers.json")
         suspend fun getCustomer(): Response<List<Customer>>
 
-        @GET("/quandoo-assessment/reservations.json")
+        @GET("quandoo-assessment/reservations.json")
         suspend fun getReservations(): Response<List<Reservation>>
+
+        companion object {
+                const val BASE_URL = "https://s3-eu-west-1.amazonaws.com/"
+        }
+
 }
+

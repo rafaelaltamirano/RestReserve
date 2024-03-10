@@ -45,6 +45,11 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = Compose.composeCompilerVersion
     }
+    packaging {
+        resources {
+            excludes += "/META-INF/*"
+        }
+    }
 }
 
 dependencies {
@@ -67,6 +72,8 @@ dependencies {
 
     implementation 'androidx.recyclerview:recyclerview:1.3.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:"
+    implementation project(':reservations:presentation')
+    implementation project(':reservations:domain')
 
     testImplementation(Testing.junit4)
     testImplementation(Testing.junitAndroidExt)
@@ -115,6 +122,8 @@ dependencies {
 
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)
+
+    implementation(Google.material)
 
 
 

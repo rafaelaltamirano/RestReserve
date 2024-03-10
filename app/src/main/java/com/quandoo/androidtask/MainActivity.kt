@@ -8,10 +8,13 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.quandoo.androidtask.ui.navigation.Route
 import com.quandoo.androidtask.ui.theme.QuandooChallengeTheme
+import com.quandoo.presentation.tables.TablesScreen
 import dagger.hilt.android.AndroidEntryPoint
+import com.quandoo.androidtask.navigation.navigate
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -30,12 +33,11 @@ class MainActivity : ComponentActivity() {
                         navController = navController, startDestination = Route.WELCOME
 
                     ) {
-
-
+                        composable(Route.WELCOME) {
+                            TablesScreen(onNavigate = navController::navigate)
+                        }
                     }
-
                 }
-
             }
         }
     }
