@@ -51,16 +51,16 @@ public final class RestaurantDatabase_Impl extends RestaurantDatabase {
       public void createAllTables(SupportSQLiteDatabase _db) {
         _db.execSQL("CREATE TABLE IF NOT EXISTS `tables` (`shape` TEXT NOT NULL, `id` INTEGER NOT NULL, PRIMARY KEY(`id`))");
         _db.execSQL("CREATE TABLE IF NOT EXISTS `customers` (`id` INTEGER NOT NULL, `firstName` TEXT NOT NULL, `lastName` TEXT NOT NULL, `imageUrl` TEXT NOT NULL, PRIMARY KEY(`id`))");
-        _db.execSQL("CREATE TABLE IF NOT EXISTS `reservation` (`userId` INTEGER NOT NULL, `tableId` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `reservations` (`userId` INTEGER NOT NULL, `tableId` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)");
         _db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3ead1464b983d9fa85df39a574518a12')");
+        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8993e4128815a6f99ed899c6e6b2cf1a')");
       }
 
       @Override
       public void dropAllTables(SupportSQLiteDatabase _db) {
         _db.execSQL("DROP TABLE IF EXISTS `tables`");
         _db.execSQL("DROP TABLE IF EXISTS `customers`");
-        _db.execSQL("DROP TABLE IF EXISTS `reservation`");
+        _db.execSQL("DROP TABLE IF EXISTS `reservations`");
         if (mCallbacks != null) {
           for (int _i = 0, _size = mCallbacks.size(); _i < _size; _i++) {
             mCallbacks.get(_i).onDestructiveMigration(_db);
@@ -125,22 +125,22 @@ public final class RestaurantDatabase_Impl extends RestaurantDatabase {
                   + " Expected:\n" + _infoCustomers + "\n"
                   + " Found:\n" + _existingCustomers);
         }
-        final HashMap<String, TableInfo.Column> _columnsReservation = new HashMap<String, TableInfo.Column>(3);
-        _columnsReservation.put("userId", new TableInfo.Column("userId", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsReservation.put("tableId", new TableInfo.Column("tableId", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsReservation.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
-        final HashSet<TableInfo.ForeignKey> _foreignKeysReservation = new HashSet<TableInfo.ForeignKey>(0);
-        final HashSet<TableInfo.Index> _indicesReservation = new HashSet<TableInfo.Index>(0);
-        final TableInfo _infoReservation = new TableInfo("reservation", _columnsReservation, _foreignKeysReservation, _indicesReservation);
-        final TableInfo _existingReservation = TableInfo.read(_db, "reservation");
-        if (! _infoReservation.equals(_existingReservation)) {
-          return new RoomOpenHelper.ValidationResult(false, "reservation(com.example.domain.model.Reservation).\n"
-                  + " Expected:\n" + _infoReservation + "\n"
-                  + " Found:\n" + _existingReservation);
+        final HashMap<String, TableInfo.Column> _columnsReservations = new HashMap<String, TableInfo.Column>(3);
+        _columnsReservations.put("userId", new TableInfo.Column("userId", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsReservations.put("tableId", new TableInfo.Column("tableId", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsReservations.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysReservations = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesReservations = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoReservations = new TableInfo("reservations", _columnsReservations, _foreignKeysReservations, _indicesReservations);
+        final TableInfo _existingReservations = TableInfo.read(_db, "reservations");
+        if (! _infoReservations.equals(_existingReservations)) {
+          return new RoomOpenHelper.ValidationResult(false, "reservations(com.example.domain.model.Reservation).\n"
+                  + " Expected:\n" + _infoReservations + "\n"
+                  + " Found:\n" + _existingReservations);
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "3ead1464b983d9fa85df39a574518a12", "0a647990e147206e624cdf726a953cc6");
+    }, "8993e4128815a6f99ed899c6e6b2cf1a", "0ab20c54ec1c0e0d54406ef6f921f7dd");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(configuration.context)
         .name(configuration.name)
         .callback(_openCallback)
@@ -153,7 +153,7 @@ public final class RestaurantDatabase_Impl extends RestaurantDatabase {
   protected InvalidationTracker createInvalidationTracker() {
     final HashMap<String, String> _shadowTablesMap = new HashMap<String, String>(0);
     HashMap<String, Set<String>> _viewTables = new HashMap<String, Set<String>>(0);
-    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "tables","customers","reservation");
+    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "tables","customers","reservations");
   }
 
   @Override
@@ -164,7 +164,7 @@ public final class RestaurantDatabase_Impl extends RestaurantDatabase {
       super.beginTransaction();
       _db.execSQL("DELETE FROM `tables`");
       _db.execSQL("DELETE FROM `customers`");
-      _db.execSQL("DELETE FROM `reservation`");
+      _db.execSQL("DELETE FROM `reservations`");
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();

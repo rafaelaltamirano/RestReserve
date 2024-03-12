@@ -39,7 +39,7 @@ public final class ReservationsDao_Impl implements ReservationsDao {
     this.__insertionAdapterOfReservation = new EntityInsertionAdapter<Reservation>(__db) {
       @Override
       public String createQuery() {
-        return "INSERT OR REPLACE INTO `reservation` (`userId`,`tableId`,`id`) VALUES (?,?,nullif(?, 0))";
+        return "INSERT OR REPLACE INTO `reservations` (`userId`,`tableId`,`id`) VALUES (?,?,nullif(?, 0))";
       }
 
       @Override
@@ -52,7 +52,7 @@ public final class ReservationsDao_Impl implements ReservationsDao {
     this.__preparedStmtOfDeleteReservationById = new SharedSQLiteStatement(__db) {
       @Override
       public String createQuery() {
-        final String _query = "DELETE FROM reservation WHERE id = ?";
+        final String _query = "DELETE FROM reservations WHERE id = ?";
         return _query;
       }
     };
@@ -118,7 +118,7 @@ public final class ReservationsDao_Impl implements ReservationsDao {
 
   @Override
   public Object getAll(final Continuation<? super List<Reservation>> $completion) {
-    final String _sql = "SELECT * FROM  reservation";
+    final String _sql = "SELECT * FROM  reservations";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
     return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<List<Reservation>>() {
@@ -132,12 +132,12 @@ public final class ReservationsDao_Impl implements ReservationsDao {
           final List<Reservation> _result = new ArrayList<Reservation>(_cursor.getCount());
           while(_cursor.moveToNext()) {
             final Reservation _item;
-            final long _tmpUserId;
-            _tmpUserId = _cursor.getLong(_cursorIndexOfUserId);
-            final long _tmpTableId;
-            _tmpTableId = _cursor.getLong(_cursorIndexOfTableId);
-            final long _tmpId;
-            _tmpId = _cursor.getLong(_cursorIndexOfId);
+            final int _tmpUserId;
+            _tmpUserId = _cursor.getInt(_cursorIndexOfUserId);
+            final int _tmpTableId;
+            _tmpTableId = _cursor.getInt(_cursorIndexOfTableId);
+            final int _tmpId;
+            _tmpId = _cursor.getInt(_cursorIndexOfId);
             _item = new Reservation(_tmpUserId,_tmpTableId,_tmpId);
             _result.add(_item);
           }

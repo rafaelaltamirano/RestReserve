@@ -1,7 +1,6 @@
 package com.example.domain.use_case
 
 import com.example.domain.model.Reservation
-import com.example.domain.model.Table
 import com.example.domain.repository.ReservationsRepository
 
 class GetReservations (

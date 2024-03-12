@@ -71,7 +71,8 @@ object ReservationsDataModule {
     ): ReservationsRepository
     {
         return ReservationsRepositoryImp(
-            dao = db.reservationsDao,
+            reservationDao = db.reservationsDao,
+            tablesDao = db.tablesDao,
             api = api
         )
     }

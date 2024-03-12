@@ -4,24 +4,26 @@ import com.quandoo.data.api.RestaurantApi
 import com.quandoo.data.dao.CustomersDao
 import com.example.domain.model.Customer
 import com.example.domain.repository.CustomersRepository
+import com.quandoo.data.mapper.toCustomer
+import com.quandoo.data.mapper.toReservation
 
 class CustomersRepositoryImp(
     private val dao: CustomersDao,
     private val api: RestaurantApi
 ) : CustomersRepository {
 
-    var customers: List<Customer> = emptyList()
+    private var customers: List<Customer> = emptyList()
     override suspend fun getCustomers(): Result<List<Customer>> {
         return try {
-            // Intenta cargar los datos de la caché
+            // try to get data from cache
             val cachedCustomers = load()
             if (cachedCustomers.isNotEmpty()) {
                 Result.success(cachedCustomers)
             } else {
-                // Si no hay datos en caché, llama a la API
+                // if there is no data in cache, get data from api
                 val dto = api.getCustomer()
-                val customers = dto.body() ?: emptyList()
-                // Guarda los datos en caché
+                val customers = dto.body()?.map { it.toCustomer() } ?: emptyList()
+                // Save data in cache
                 save(customers)
                 Result.success(customers)
             }

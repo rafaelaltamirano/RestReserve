@@ -26,15 +26,19 @@ class MainActivity : ComponentActivity() {
                 val scaffoldState = rememberScaffoldState()
 
                 Scaffold(
-                    modifier = Modifier.fillMaxSize(), scaffoldState = scaffoldState
+                    modifier = Modifier.fillMaxSize(),
+                    scaffoldState = scaffoldState
                 ) {
                     val padding = it
                     NavHost(
-                        navController = navController, startDestination = Route.WELCOME
+                        navController = navController,
+                        startDestination = Route.WELCOME
 
                     ) {
                         composable(Route.WELCOME) {
-                            TablesScreen(onNavigate = navController::navigate)
+                            TablesScreen(
+                                onNavigate = navController::navigate,
+                            )
                         }
                     }
                 }

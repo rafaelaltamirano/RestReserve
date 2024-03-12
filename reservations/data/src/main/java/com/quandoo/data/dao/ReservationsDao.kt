@@ -9,7 +9,7 @@ import com.example.domain.model.Reservation
 @Dao
 interface ReservationsDao {
 
-    @Query("SELECT * FROM  reservation")
+    @Query("SELECT * FROM  reservations")
     suspend fun getAll(): List<Reservation>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -18,6 +18,6 @@ interface ReservationsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertReservation(reservation: Reservation)
 
-    @Query("DELETE FROM reservation WHERE id = :reservationId")
+    @Query("DELETE FROM reservations WHERE id = :reservationId")
     suspend fun deleteReservationById(reservationId: Int)
 }

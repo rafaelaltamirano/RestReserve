@@ -4,7 +4,7 @@ package com.quandoo.data.dao;
 @androidx.room.Dao
 public abstract interface ReservationsDao {
     
-    @androidx.room.Query(value = "SELECT * FROM  reservation")
+    @androidx.room.Query(value = "SELECT * FROM  reservations")
     @org.jetbrains.annotations.Nullable
     public abstract java.lang.Object getAll(@org.jetbrains.annotations.NotNull
     kotlin.coroutines.Continuation<? super java.util.List<com.example.domain.model.Reservation>> $completion);
@@ -21,7 +21,7 @@ public abstract interface ReservationsDao {
     com.example.domain.model.Reservation reservation, @org.jetbrains.annotations.NotNull
     kotlin.coroutines.Continuation<? super kotlin.Unit> $completion);
     
-    @androidx.room.Query(value = "DELETE FROM reservation WHERE id = :reservationId")
+    @androidx.room.Query(value = "DELETE FROM reservations WHERE id = :reservationId")
     @org.jetbrains.annotations.Nullable
     public abstract java.lang.Object deleteReservationById(int reservationId, @org.jetbrains.annotations.NotNull
     kotlin.coroutines.Continuation<? super kotlin.Unit> $completion);

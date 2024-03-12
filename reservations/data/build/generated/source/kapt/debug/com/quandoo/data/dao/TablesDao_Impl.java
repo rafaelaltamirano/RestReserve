@@ -89,8 +89,8 @@ public final class TablesDao_Impl implements TablesDao {
             } else {
               _tmpShape = _cursor.getString(_cursorIndexOfShape);
             }
-            final long _tmpId;
-            _tmpId = _cursor.getLong(_cursorIndexOfId);
+            final int _tmpId;
+            _tmpId = _cursor.getInt(_cursorIndexOfId);
             _item = new Table(_tmpShape,_tmpId);
             _result.add(_item);
           }
