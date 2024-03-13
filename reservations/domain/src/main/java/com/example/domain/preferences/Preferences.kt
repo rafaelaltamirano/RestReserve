@@ -8,11 +8,16 @@ interface Preferences {
 
     fun saveTable(tableId: Int)
 
+    fun saveFirstRun(firstRun: Boolean)
+
+    fun loadFirstRun(): Boolean
+
     fun loadReserve(): Reservation
 
     companion object {
         const val KEY_CUSTOMER = "customer"
         const val KEY_TABLE = "table"
+        const val FIRST_RUN = "first_run"
     }
 
 }

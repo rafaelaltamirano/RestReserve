@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.domain.util.UiEvent
 import com.quandoo.presentation.components.CustomerItem
-import com.quandoo.presentation.tables.TablesViewModel
 
 
 @Composable

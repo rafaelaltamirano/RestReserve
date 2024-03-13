@@ -24,6 +24,9 @@ android {
 }
 
 dependencies {
+    implementation(project(Modules.domain))
+    implementation(project(Modules.data))
+
     implementation(Compose.ui)
     implementation(Compose.material)
     implementation(Compose.runtime)
@@ -37,6 +40,5 @@ dependencies {
     implementation(Coil.coilCompose)
     implementation(Coroutines.coroutinesCore)
     implementation(Coroutines.coroutinesAndroid)
-    implementation(project(":reservations:domain"))
-    implementation(project(":reservations:data"))
+
 }

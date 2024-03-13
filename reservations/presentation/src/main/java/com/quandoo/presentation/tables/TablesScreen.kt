@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.domain.model.SelectedReservation
 import com.example.domain.util.UiEvent
-import com.quandoo.presentation.components.CustomImageDialog
+import com.quandoo.presentation.components.ReserveDialog
 import com.quandoo.presentation.components.TableItem
 
 @Composable
@@ -44,7 +44,7 @@ fun TablesScreen(
         }
     }
 
-    CustomImageDialog(show = state.showDialog,
+    ReserveDialog(show = state.showDialog,
         reserveNumber = state.selectedReservation?.reservationId.toString(),
         reservedBy = state.selectedReservation?.customerName,
         tableNumber = state.selectedReservation?.tableId.toString(),

@@ -1,5 +1,5 @@
 object ProjectConfig {
-    const val appId = "com.quandoo.challenge"
+    const val appId = "com.quandoo.androidtask"
     const val compileSdk = 34
     const val minSdk = 24
     const val targetSdk = 34

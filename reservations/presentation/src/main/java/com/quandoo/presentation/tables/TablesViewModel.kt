@@ -151,4 +151,5 @@ class TablesViewModel @Inject constructor(
             _uiEvent.send(UiEvent.Navigate(Route.CUSTOMERS))
         }
     }
+
 }
