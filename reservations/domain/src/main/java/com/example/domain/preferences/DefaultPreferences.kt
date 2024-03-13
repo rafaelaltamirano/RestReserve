@@ -29,7 +29,7 @@ class DefaultPreferences
     }
 
     override fun loadFirstRun(): Boolean {
-        return sharedPreferences.getBoolean(FIRST_RUN, true)
+        return sharedPreferences.getBoolean(FIRST_RUN, false)
     }
 
     override fun loadReserve(): Reservation {

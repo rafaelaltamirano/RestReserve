@@ -34,28 +34,31 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             QuandooChallengeTheme {
-                val hasInternetConnection = remember { mutableStateOf(false) }
+                val showDialog = remember { mutableStateOf(false) }
                 val navController = rememberNavController()
                 val scaffoldState = rememberScaffoldState()
 
+
                 LaunchedEffect(Unit) {
-                    if (preferences.loadFirstRun()) {
+                    if (!preferences.loadFirstRun()) {
                         val hasConnection = this@MainActivity.checkInternetConnection()
-                        if (!hasConnection) {
-                            hasInternetConnection.value = false
-                        } else {
+                        if (hasConnection) {
                             preferences.saveFirstRun(true)
+                            return@LaunchedEffect
                         }
+                        else showDialog.value = true
+                        return@LaunchedEffect
                     }
+                    showDialog.value = false
                 }
 
-                if (!hasInternetConnection.value) {
+                if (showDialog.value) {
                     AlertDialog(title = "Not internet connection",
                         message = "Please, connect your device to the internet to continue.",
                         onPressButton = {
                             val hasConnection = this@MainActivity.checkInternetConnection()
                             if (hasConnection) {
-                                hasInternetConnection.value = true
+                                showDialog.value = false
                                 preferences.saveFirstRun(true)
                             }
                         })
