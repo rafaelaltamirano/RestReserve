@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.domain.model.SelectedReservation
 import com.example.domain.util.UiEvent
+import com.quandoo.presentation.components.BackPressHandler
 import com.quandoo.presentation.components.ReserveDialog
 import com.quandoo.presentation.components.TableItem
 
@@ -27,6 +28,8 @@ fun TablesScreen(
     tablesViewModel: TablesViewModel = hiltViewModel()
 ) {
     val state = tablesViewModel.state
+    BackPressHandler()
+
 
     LaunchedEffect(key1 = true) {
         tablesViewModel.uiEvent.collect { event ->

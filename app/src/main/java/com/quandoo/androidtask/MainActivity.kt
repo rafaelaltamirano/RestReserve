@@ -33,11 +33,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
             QuandooChallengeTheme {
                 val showDialog = remember { mutableStateOf(false) }
                 val navController = rememberNavController()
                 val scaffoldState = rememberScaffoldState()
-
 
                 LaunchedEffect(Unit) {
                     if (!preferences.loadFirstRun()) {
@@ -79,6 +79,7 @@ class MainActivity : ComponentActivity() {
                             composable(Route.CUSTOMERS) {
                                 CustomersScreen(
                                     onNavigate = navController::navigate,
+
                                 )
                             }
                         }

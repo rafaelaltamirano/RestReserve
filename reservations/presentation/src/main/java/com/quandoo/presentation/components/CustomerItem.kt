@@ -63,7 +63,7 @@ fun CustomerItem(
                     .clip(shape = RoundedCornerShape(15.dp))
             ) {
                 Image(
-                    painter = rememberAsyncImagePainter(customer?.imageUrl),
+                    painter = rememberAsyncImagePainter(customer.imageUrl),
                     contentDescription = "cover",
                     modifier = Modifier
                         .width(90.dp)
@@ -75,7 +75,7 @@ fun CustomerItem(
                 modifier = Modifier.padding(start = 10.dp, end = 20.dp, top = 0.dp, bottom = 0.dp)
             ) {
                 Text(
-                    text = customer?.firstName + " " + customer?.lastName,
+                    text = customer.firstName + " " + customer.lastName,
                     color = Color.DarkGray,
                     style = MaterialTheme.typography.body1,
                     maxLines = 1,
