@@ -23,15 +23,16 @@ import com.quandoo.presentation.components.TableItem
 
 @Composable
 fun TablesScreen(
-    onNavigate: (UiEvent.Navigate) -> Unit, tablesViewModel: TablesViewModel = hiltViewModel()
+    onNavigate: (UiEvent.Navigate) -> Unit,
+    tablesViewModel: TablesViewModel = hiltViewModel()
 ) {
     val state = tablesViewModel.state
-
 
     LaunchedEffect(key1 = true) {
         tablesViewModel.uiEvent.collect { event ->
             when (event) {
-                is UiEvent.Navigate -> { /* Manejar la navegación */
+                is UiEvent.Navigate -> {
+                    onNavigate(event)
                 }
 
                 is UiEvent.ShowCustomDialog -> {
@@ -101,9 +102,13 @@ fun TablesScreen(
                     customer = customer,
                     shape = table.shape,
                     hasReserve = reservation != null,
-                    onItemClick = {
-                        tablesViewModel.showCustomDialog()
-                        tablesViewModel.setSelectedReservation(selectedReservation)
+                    onItemClick = {tableId ->
+                        if (reservation != null) {
+                            tablesViewModel.showCustomDialog()
+                            tablesViewModel.setSelectedReservation(selectedReservation)
+                        } else {
+                            tablesViewModel.onNextClick(tableId)
+                        }
                     })
             }
         }

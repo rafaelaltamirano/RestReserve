@@ -1,5 +1,8 @@
 package com.example.domain.di
 
+import android.content.SharedPreferences
+import com.example.domain.preferences.DefaultPreferences
+import com.example.domain.preferences.Preferences
 import com.example.domain.repository.CustomersRepository
 import com.example.domain.repository.ReservationsRepository
 import com.example.domain.repository.TablesRepository
@@ -7,12 +10,14 @@ import com.example.domain.use_case.DeleteReservation
 import com.example.domain.use_case.GetCustomers
 import com.example.domain.use_case.GetReservations
 import com.example.domain.use_case.GetTables
+import com.example.domain.use_case.InsertReservation
 import com.example.domain.use_case.LoadReservations
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
+import javax.inject.Singleton
 
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -63,6 +68,16 @@ object ReservationsDomainModule {
         repository: ReservationsRepository,
     ): LoadReservations {
         return LoadReservations(
+            repository = repository
+        )
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun provideInsertReservationUseCase(
+        repository: ReservationsRepository,
+    ): InsertReservation {
+        return InsertReservation(
             repository = repository
         )
     }

@@ -10,11 +10,13 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.quandoo.androidtask.ui.navigation.Route
+import com.quandoo.presentation.navigation.Route
 import com.quandoo.androidtask.ui.theme.QuandooChallengeTheme
 import com.quandoo.presentation.tables.TablesScreen
 import dagger.hilt.android.AndroidEntryPoint
 import com.quandoo.androidtask.navigation.navigate
+import com.quandoo.presentation.users.CustomerState
+import com.quandoo.presentation.users.CustomersScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -32,11 +34,16 @@ class MainActivity : ComponentActivity() {
                     val padding = it
                     NavHost(
                         navController = navController,
-                        startDestination = Route.WELCOME
+                        startDestination = Route.TABLES
 
                     ) {
-                        composable(Route.WELCOME) {
+                        composable(Route.TABLES) {
                             TablesScreen(
+                                onNavigate = navController::navigate,
+                            )
+                        }
+                        composable(Route.CUSTOMERS) {
+                            CustomersScreen(
                                 onNavigate = navController::navigate,
                             )
                         }

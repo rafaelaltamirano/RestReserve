@@ -42,7 +42,7 @@ fun TableItem(
     customer: Customer?,
     shape: String,
     hasReserve: Boolean,
-    onItemClick: () -> Unit
+    onItemClick: (Int) -> Unit
 
 ) {
     val imageResource = when (shape) {
@@ -50,12 +50,6 @@ fun TableItem(
         "square" -> R.drawable.square_table
         "rectangle" -> R.drawable.rectangle_table
         else ->  R.drawable.rectangle_table
-    }
-
-    val clickeableModifier = if (hasReserve) {
-        Modifier.clickable(onClick = onItemClick)
-    } else {
-        Modifier
     }
 
     Card(
@@ -73,9 +67,10 @@ fun TableItem(
             },
 
     ) {
-        Row(modifier  = clickeableModifier
+        Row(modifier  = Modifier
             .padding(8.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable { onItemClick(tableId) },
             verticalAlignment = Alignment.CenterVertically,
 
         ) {

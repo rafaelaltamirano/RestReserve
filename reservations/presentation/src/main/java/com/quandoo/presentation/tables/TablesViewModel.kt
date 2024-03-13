@@ -8,6 +8,7 @@ import com.example.domain.model.Customer
 import com.example.domain.model.Reservation
 import com.example.domain.model.SelectedReservation
 import com.example.domain.model.Table
+import com.example.domain.preferences.Preferences
 import com.example.domain.use_case.DeleteReservation
 import com.example.domain.use_case.GetCustomers
 import com.example.domain.use_case.GetReservations
@@ -15,6 +16,7 @@ import com.example.domain.use_case.GetTables
 import com.example.domain.use_case.LoadReservations
 import com.example.domain.util.UiEvent
 import com.quandoo.presentation.ViewModelWithStatus
+import com.quandoo.presentation.navigation.Route
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -30,7 +32,8 @@ class TablesViewModel @Inject constructor(
     private val getReservations: GetReservations,
     private val getCustomers: GetCustomers,
     private val deleteReservation: DeleteReservation,
-    private val loadReservations: LoadReservations
+    private val loadReservations: LoadReservations,
+    private val preferences: Preferences
 ) : ViewModelWithStatus() {
 
     var state by mutableStateOf(TablesState())
@@ -127,7 +130,7 @@ class TablesViewModel @Inject constructor(
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 deleteReservation.invoke(reserveId)
-            }.also { loadReservations() }
+            }.also { loadReservations()}
         }
     }
 
@@ -139,6 +142,13 @@ class TablesViewModel @Inject constructor(
             }.also {
                 setReservations(it ?: emptyList())
             }
+        }
+    }
+
+    fun onNextClick(tableId: Int) {
+        viewModelScope.launch {
+            preferences.saveTable(tableId)
+            _uiEvent.send(UiEvent.Navigate(Route.CUSTOMERS))
         }
     }
 }
