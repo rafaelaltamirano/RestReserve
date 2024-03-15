@@ -7,25 +7,20 @@ import com.example.domain.preferences.Preferences.Companion.KEY_CUSTOMER
 import com.example.domain.preferences.Preferences.Companion.KEY_TABLE
 
 class DefaultPreferences
-    (private val sharedPreferences: SharedPreferences
+    (
+    private val sharedPreferences: SharedPreferences
 ) : Preferences {
 
     override fun saveCustomer(customerId: Int) {
-        sharedPreferences.edit()
-            .putInt(KEY_CUSTOMER, customerId)
-            .apply()
+        sharedPreferences.edit().putInt(KEY_CUSTOMER, customerId).apply()
     }
 
     override fun saveTable(tableId: Int) {
-        sharedPreferences.edit()
-            .putInt(KEY_TABLE, tableId)
-            .apply()
+        sharedPreferences.edit().putInt(KEY_TABLE, tableId).apply()
     }
 
     override fun saveFirstRun(firstRun: Boolean) {
-        sharedPreferences.edit()
-            .putBoolean(FIRST_RUN, firstRun)
-            .apply()
+        sharedPreferences.edit().putBoolean(FIRST_RUN, firstRun).apply()
     }
 
     override fun loadFirstRun(): Boolean {
@@ -35,6 +30,6 @@ class DefaultPreferences
     override fun loadReserve(): Reservation {
         val customerId = sharedPreferences.getInt(KEY_CUSTOMER, 0)
         val tableId = sharedPreferences.getInt(KEY_TABLE, 0)
-        return Reservation(customerId, tableId,0)
+        return Reservation(customerId, tableId, 0)
     }
 }

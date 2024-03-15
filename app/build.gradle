@@ -14,7 +14,7 @@ android {
         versionCode = ProjectConfig.versionCode
         versionName = ProjectConfig.versionName
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.quandoo.androidtask.HiltTestRunner"
     }
     buildTypes {
         release {
@@ -29,6 +29,11 @@ android {
 
     testOptions {
         animationsDisabled = true
+        packagingOptions {
+            jniLibs {
+                useLegacyPackaging = true
+            }
+        }
     }
 
     kotlinOptions {
@@ -66,6 +71,8 @@ dependencies {
     testImplementation(Testing.mockWebServer)
     testImplementation(Testing.espressoCore)
     testImplementation(Testing.espressoContrib)
+    testImplementation "io.mockk:mockk:1.13.3"
+    androidTestImplementation "io.mockk:mockk-android:1.13.3"
 
     androidTestImplementation(Testing.junit4)
     androidTestImplementation(Testing.junitAndroidExt)

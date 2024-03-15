@@ -2,16 +2,35 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="PreviewCustomImageDialog">
+      <entry key="MainActivityContentTest">
         <State />
       </entry>
-      <entry key="PreviewItemList">
+      <entry key="MainActivityTest">
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="$USER_HOME$/.android/avd/Pixel_4_API_30.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-03-15T13:44:06.857802Z" />
+        </State>
+      </entry>
+      <entry key="PreviewCustomImageDialog">
         <State />
       </entry>
       <entry key="app">
         <State />
       </entry>
-      <entry key="reserveTableTest()">
+      <entry key="noInternetConnectionDialogVisibleOnFirstLaunchWithoutInternet()">
+        <State />
+      </entry>
+      <entry key="noInternetConnectionDialogVisibleOnFirstLaunchWithoutInternet() (1)">
         <State />
       </entry>
     </value>
