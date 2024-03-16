@@ -14,6 +14,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.domain.model.SelectedReservation
@@ -24,7 +25,7 @@ import com.quandoo.presentation.components.TableItem
 
 @Composable
 fun TablesScreen(
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
     tablesViewModel: TablesViewModel = hiltViewModel()
 ) {
     val state = tablesViewModel.state
@@ -35,7 +36,7 @@ fun TablesScreen(
         tablesViewModel.uiEvent.collect { event ->
             when (event) {
                 is UiEvent.Navigate -> {
-                    onNavigate(event)
+                    onNextClick()
                 }
 
                 is UiEvent.ShowCustomDialog -> {
@@ -83,7 +84,9 @@ fun TablesScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp),
+                .padding(horizontal = 16.dp)
+                .testTag("LazyColumnTables"),
+
         ) {
             items(state.tables.size) {
                 val customer = tablesViewModel.findReservationUserName(
@@ -101,7 +104,8 @@ fun TablesScreen(
                     customer?.imageUrl ?: ""
                 )
 
-                TableItem(tableId = table.id,
+                TableItem(
+                    tableId = table.id,
                     customer = customer,
                     shape = table.shape,
                     hasReserve = reservation != null,

@@ -18,11 +18,11 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 import androidx.sqlite.db.SupportSQLiteOpenHelper.Callback;
 import androidx.sqlite.db.SupportSQLiteOpenHelper.Configuration;
 import com.quandoo.data.dao.CustomersDao;
-import com.quandoo.data.dao.CustomersDao_Impl;
+import com.quandoo.data.dao.CustomersDao_RestaurantDatabase_Impl;
 import com.quandoo.data.dao.ReservationsDao;
-import com.quandoo.data.dao.ReservationsDao_Impl;
+import com.quandoo.data.dao.ReservationsDao_RestaurantDatabase_Impl;
 import com.quandoo.data.dao.TablesDao;
-import com.quandoo.data.dao.TablesDao_Impl;
+import com.quandoo.data.dao.TablesDao_RestaurantDatabase_Impl;
 import java.lang.Class;
 import java.lang.Override;
 import java.lang.String;
@@ -178,9 +178,9 @@ public final class RestaurantDatabase_Impl extends RestaurantDatabase {
   @Override
   protected Map<Class<?>, List<Class<?>>> getRequiredTypeConverters() {
     final HashMap<Class<?>, List<Class<?>>> _typeConvertersMap = new HashMap<Class<?>, List<Class<?>>>();
-    _typeConvertersMap.put(TablesDao.class, TablesDao_Impl.getRequiredConverters());
-    _typeConvertersMap.put(CustomersDao.class, CustomersDao_Impl.getRequiredConverters());
-    _typeConvertersMap.put(ReservationsDao.class, ReservationsDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(TablesDao.class, TablesDao_RestaurantDatabase_Impl.getRequiredConverters());
+    _typeConvertersMap.put(CustomersDao.class, CustomersDao_RestaurantDatabase_Impl.getRequiredConverters());
+    _typeConvertersMap.put(ReservationsDao.class, ReservationsDao_RestaurantDatabase_Impl.getRequiredConverters());
     return _typeConvertersMap;
   }
 
@@ -203,7 +203,7 @@ public final class RestaurantDatabase_Impl extends RestaurantDatabase {
     } else {
       synchronized(this) {
         if(_tablesDao == null) {
-          _tablesDao = new TablesDao_Impl(this);
+          _tablesDao = new TablesDao_RestaurantDatabase_Impl(this);
         }
         return _tablesDao;
       }
@@ -217,7 +217,7 @@ public final class RestaurantDatabase_Impl extends RestaurantDatabase {
     } else {
       synchronized(this) {
         if(_customersDao == null) {
-          _customersDao = new CustomersDao_Impl(this);
+          _customersDao = new CustomersDao_RestaurantDatabase_Impl(this);
         }
         return _customersDao;
       }
@@ -231,7 +231,7 @@ public final class RestaurantDatabase_Impl extends RestaurantDatabase {
     } else {
       synchronized(this) {
         if(_reservationsDao == null) {
-          _reservationsDao = new ReservationsDao_Impl(this);
+          _reservationsDao = new ReservationsDao_RestaurantDatabase_Impl(this);
         }
         return _reservationsDao;
       }

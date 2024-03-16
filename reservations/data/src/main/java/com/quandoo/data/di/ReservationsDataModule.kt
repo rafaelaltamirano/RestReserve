@@ -8,6 +8,7 @@ import com.example.domain.repository.ReservationsRepository
 import com.example.domain.repository.TablesRepository
 import com.quandoo.data.api.RestaurantApi
 import com.quandoo.data.database.RestaurantDatabase
+import com.quandoo.data.database.RestaurantDatabaseTest
 import com.quandoo.data.repositoryImp.CustomersRepositoryImp
 import com.quandoo.data.repositoryImp.ReservationsRepositoryImp
 import com.quandoo.data.repositoryImp.TablesRepositoryImp
@@ -40,13 +41,24 @@ object ReservationsDataModule {
             //PARSE AUTOMATICALLY DE JSON RESPONSE TO OUR DTO OBJECT
             .addConverterFactory(MoshiConverterFactory.create()).client(client).build().create()
     }
+//    @Provides
+//    @Singleton
+//    fun providesRestaurantDatabase(app: Application): RestaurantDatabase {
+//        return Room.databaseBuilder(
+//            app,
+//            RestaurantDatabase::class.java,
+//            "restaurant.db",
+//        ).build()
+//    }
+
+
     @Provides
     @Singleton
-    fun providesRestaurantDatabase(app: Application): RestaurantDatabase {
+    fun providesRestaurantDatabase(app: Application): RestaurantDatabaseTest {
         return Room.databaseBuilder(
             app,
-            RestaurantDatabase::class.java,
-            "restaurant.db",
+            RestaurantDatabaseTest::class.java,
+            "restaurant.db.test",
         ).build()
     }
 
@@ -54,7 +66,8 @@ object ReservationsDataModule {
     @Singleton
     fun provideCustomerRepository(
         api: RestaurantApi,
-        db: RestaurantDatabase
+//        db: RestaurantDatabase
+        db: RestaurantDatabaseTest
     ): CustomersRepository
     {
         return CustomersRepositoryImp(
@@ -67,7 +80,8 @@ object ReservationsDataModule {
     @Singleton
     fun provideReservationRepository(
         api: RestaurantApi,
-        db: RestaurantDatabase
+//        db: RestaurantDatabase
+        db: RestaurantDatabaseTest
     ): ReservationsRepository
     {
         return ReservationsRepositoryImp(
@@ -81,7 +95,8 @@ object ReservationsDataModule {
     @Singleton
     fun provideTablesRepository(
         api: RestaurantApi,
-        db: RestaurantDatabase
+//        db: RestaurantDatabase
+        db: RestaurantDatabaseTest
     ): TablesRepository
     {
         return TablesRepositoryImp(

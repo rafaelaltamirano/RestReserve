@@ -24,7 +24,7 @@ import com.quandoo.presentation.components.CustomerItem
 
 @Composable
 fun CustomersScreen(
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
     customersViewModel: CustomersViewModel = hiltViewModel(),
 ){
     val state = customersViewModel.state
@@ -34,7 +34,7 @@ fun CustomersScreen(
         customersViewModel.uiEvent.collect { event ->
             when (event) {
                 is UiEvent.Navigate -> {
-                    onNavigate(event)
+                    onNextClick()
                 }
                 else -> Unit
             }

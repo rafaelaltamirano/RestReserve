@@ -2,7 +2,7 @@ package com.quandoo.data.di;
 
 import com.example.domain.repository.TablesRepository;
 import com.quandoo.data.api.RestaurantApi;
-import com.quandoo.data.database.RestaurantDatabase;
+import com.quandoo.data.database.RestaurantDatabaseTest;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.Preconditions;
@@ -27,10 +27,10 @@ import javax.inject.Provider;
 public final class ReservationsDataModule_ProvideTablesRepositoryFactory implements Factory<TablesRepository> {
   private final Provider<RestaurantApi> apiProvider;
 
-  private final Provider<RestaurantDatabase> dbProvider;
+  private final Provider<RestaurantDatabaseTest> dbProvider;
 
   public ReservationsDataModule_ProvideTablesRepositoryFactory(Provider<RestaurantApi> apiProvider,
-      Provider<RestaurantDatabase> dbProvider) {
+      Provider<RestaurantDatabaseTest> dbProvider) {
     this.apiProvider = apiProvider;
     this.dbProvider = dbProvider;
   }
@@ -41,11 +41,12 @@ public final class ReservationsDataModule_ProvideTablesRepositoryFactory impleme
   }
 
   public static ReservationsDataModule_ProvideTablesRepositoryFactory create(
-      Provider<RestaurantApi> apiProvider, Provider<RestaurantDatabase> dbProvider) {
+      Provider<RestaurantApi> apiProvider, Provider<RestaurantDatabaseTest> dbProvider) {
     return new ReservationsDataModule_ProvideTablesRepositoryFactory(apiProvider, dbProvider);
   }
 
-  public static TablesRepository provideTablesRepository(RestaurantApi api, RestaurantDatabase db) {
+  public static TablesRepository provideTablesRepository(RestaurantApi api,
+      RestaurantDatabaseTest db) {
     return Preconditions.checkNotNullFromProvides(ReservationsDataModule.INSTANCE.provideTablesRepository(api, db));
   }
 }

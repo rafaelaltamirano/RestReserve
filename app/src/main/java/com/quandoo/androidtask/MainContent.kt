@@ -29,12 +29,16 @@ import com.quandoo.presentation.users.CustomersScreen
         ) {
             composable(Route.TABLES) {
                 TablesScreen(
-                    onNavigate = navController::navigate,
+                    onNextClick = {
+                        navController.navigate(Route.CUSTOMERS)
+                    }
                 )
             }
             composable(Route.CUSTOMERS) {
                 CustomersScreen(
-                    onNavigate = navController::navigate
+                    onNextClick = {
+                        navController.navigate(Route.TABLES)
+                    }
                 )
             }
         }

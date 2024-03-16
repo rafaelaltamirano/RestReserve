@@ -21,11 +21,37 @@
           <timeTargetWasSelectedWithDropDown value="2024-03-15T13:44:06.857802Z" />
         </State>
       </entry>
-      <entry key="PreviewCustomImageDialog">
-        <State />
+      <entry key="OpenAppInOfflineModeInCacheModeTest">
+        <State>
+          <runningDeviceTargetSelectedWithDropDown>
+            <Target>
+              <type value="RUNNING_DEVICE_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="$USER_HOME$/.android/avd/Pixel_4_API_30.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </runningDeviceTargetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-03-15T17:12:14.191688Z" />
+        </State>
       </entry>
       <entry key="app">
-        <State />
+        <State>
+          <runningDeviceTargetSelectedWithDropDown>
+            <Target>
+              <type value="RUNNING_DEVICE_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="$USER_HOME$/.android/avd/Pixel_4_API_30.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </runningDeviceTargetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-03-15T17:10:32.671597Z" />
+        </State>
       </entry>
       <entry key="noInternetConnectionDialogVisibleOnFirstLaunchWithoutInternet()">
         <State />

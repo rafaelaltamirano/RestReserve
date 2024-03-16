@@ -1,7 +1,7 @@
 package com.quandoo.data.di;
 
 import android.app.Application;
-import com.quandoo.data.database.RestaurantDatabase;
+import com.quandoo.data.database.RestaurantDatabaseTest;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.Preconditions;
@@ -23,7 +23,7 @@ import javax.inject.Provider;
     "KotlinInternal",
     "KotlinInternalInJava"
 })
-public final class ReservationsDataModule_ProvidesRestaurantDatabaseFactory implements Factory<RestaurantDatabase> {
+public final class ReservationsDataModule_ProvidesRestaurantDatabaseFactory implements Factory<RestaurantDatabaseTest> {
   private final Provider<Application> appProvider;
 
   public ReservationsDataModule_ProvidesRestaurantDatabaseFactory(
@@ -32,7 +32,7 @@ public final class ReservationsDataModule_ProvidesRestaurantDatabaseFactory impl
   }
 
   @Override
-  public RestaurantDatabase get() {
+  public RestaurantDatabaseTest get() {
     return providesRestaurantDatabase(appProvider.get());
   }
 
@@ -41,7 +41,7 @@ public final class ReservationsDataModule_ProvidesRestaurantDatabaseFactory impl
     return new ReservationsDataModule_ProvidesRestaurantDatabaseFactory(appProvider);
   }
 
-  public static RestaurantDatabase providesRestaurantDatabase(Application app) {
+  public static RestaurantDatabaseTest providesRestaurantDatabase(Application app) {
     return Preconditions.checkNotNullFromProvides(ReservationsDataModule.INSTANCE.providesRestaurantDatabase(app));
   }
 }

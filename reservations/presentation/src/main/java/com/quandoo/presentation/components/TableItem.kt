@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Color.Companion.DarkGray
 import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.graphics.Color.Companion.Red
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -49,7 +50,7 @@ fun TableItem(
         "circle" -> R.drawable.circle_table
         "square" -> R.drawable.square_table
         "rectangle" -> R.drawable.rectangle_table
-        else ->  R.drawable.rectangle_table
+        else -> R.drawable.rectangle_table
     }
 
     Card(
@@ -64,16 +65,20 @@ fun TableItem(
                     end = Offset(size.width, size.height),
                     strokeWidth = 1.dp.toPx()
                 )
-            },
 
-    ) {
-        Row(modifier  = Modifier
-            .padding(8.dp)
-            .fillMaxWidth()
-            .clickable { onItemClick(tableId) },
-            verticalAlignment = Alignment.CenterVertically,
+            }
+            .testTag("TableItems"),
+
 
         ) {
+        Row(
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth()
+                .clickable { onItemClick(tableId) },
+            verticalAlignment = Alignment.CenterVertically,
+
+            ) {
             Box(
                 modifier = Modifier
                     .width(90.dp)
@@ -90,7 +95,7 @@ fun TableItem(
             }
             Column(
                 verticalArrangement = Arrangement.spacedBy(10.dp),
-                modifier = Modifier.padding(start = 10.dp, end= 20.dp,top = 0.dp, bottom = 0.dp)
+                modifier = Modifier.padding(start = 10.dp, end = 20.dp, top = 0.dp, bottom = 0.dp)
             ) {
                 Text(
                     text = "Table $tableId",
@@ -100,7 +105,7 @@ fun TableItem(
                     fontWeight = Bold,
                     overflow = TextOverflow.Ellipsis,
 
-                )
+                    )
                 Text(
                     text = shape.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() },
                     color = DarkGray,
@@ -110,7 +115,8 @@ fun TableItem(
                 )
 
                 Text(
-                    text =  customer?.run {"Reserved by ${customer.firstName} ${customer.lastName}"} ?: "FREE",
+                    text = customer?.run { "Reserved by ${customer.firstName} ${customer.lastName}" }
+                        ?: "FREE",
                     color = DarkGray,
                     style = MaterialTheme.typography.body2,
                     maxLines = 1,
@@ -119,7 +125,11 @@ fun TableItem(
                 )
 
             }
-            Spacer(Modifier.weight(1f).fillMaxHeight())
+            Spacer(
+                Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+            )
             Box(
                 modifier = Modifier
                     .width(10.dp)
