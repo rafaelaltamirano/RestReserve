@@ -69,7 +69,6 @@ fun CustomersScreen(
                 .padding(horizontal = 16.dp),
         ) {
             items(state.customers.size) {
-
                 CustomerItem(
                     customer = state.customers[it],
                     onItemClick = {selectedCustomerId ->

@@ -28,6 +28,9 @@ object Testing {
     private const val testRunnerVersion = "1.4.0"
     const val testRunner = "androidx.test:runner:$testRunnerVersion"
 
+    private const val navigationTestVersion = "2.5.3"
+    const val navigationTest = "androidx.navigation:navigation-testing:$navigationTestVersion"
+
     private const val espressoVersion = "3.5.1"
     const val espressoCore = "androidx.test.espresso:espresso-core:$espressoVersion"
     const val espressoContrib = "androidx.test.espresso:espresso-contrib:$espressoVersion"

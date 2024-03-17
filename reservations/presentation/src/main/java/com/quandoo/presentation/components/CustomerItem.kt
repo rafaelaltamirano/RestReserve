@@ -21,6 +21,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -52,7 +53,8 @@ fun CustomerItem(
             modifier = Modifier
                 .padding(8.dp)
                 .fillMaxWidth()
-                .clickable { onItemClick(customer.id) },
+                .clickable { onItemClick(customer.id) }
+                .testTag("Customer${customer.id}"),
             verticalAlignment = Alignment.CenterVertically,
 
             ) {
@@ -81,7 +83,6 @@ fun CustomerItem(
                     maxLines = 1,
                     fontWeight = FontWeight.Bold,
                     overflow = TextOverflow.Ellipsis,
-
                     )
 
             }

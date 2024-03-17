@@ -30,7 +30,6 @@ import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.quandoo.presentation.R
@@ -43,7 +42,7 @@ fun TableItem(
     customer: Customer?,
     shape: String,
     hasReserve: Boolean,
-    onItemClick: (Int) -> Unit
+    onItemClick: (Int) -> Unit,
 
 ) {
     val imageResource = when (shape) {
@@ -67,15 +66,14 @@ fun TableItem(
                 )
 
             }
-            .testTag("TableItems"),
-
 
         ) {
         Row(
             modifier = Modifier
                 .padding(8.dp)
                 .fillMaxWidth()
-                .clickable { onItemClick(tableId) },
+                .clickable { onItemClick(tableId) }
+                .testTag("Table$tableId"),
             verticalAlignment = Alignment.CenterVertically,
 
             ) {
@@ -103,8 +101,7 @@ fun TableItem(
                     style = MaterialTheme.typography.body1,
                     maxLines = 1,
                     fontWeight = Bold,
-                    overflow = TextOverflow.Ellipsis,
-
+                    overflow = TextOverflow.Ellipsis
                     )
                 Text(
                     text = shape.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() },
@@ -136,6 +133,7 @@ fun TableItem(
                     .height(100.dp)
                     .background(if (hasReserve) Red else Green)
                     .clip(RoundedCornerShape(100.dp))
+                    .testTag("Box$tableId"),
             )
         }
     }

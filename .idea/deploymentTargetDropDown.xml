@@ -2,9 +2,6 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="MainActivityContentTest">
-        <State />
-      </entry>
       <entry key="MainActivityTest">
         <State>
           <targetSelectedWithDropDown>
@@ -37,6 +34,9 @@
           <timeTargetWasSelectedWithDropDown value="2024-03-15T17:12:14.191688Z" />
         </State>
       </entry>
+      <entry key="TableReservationScreenTest()">
+        <State />
+      </entry>
       <entry key="app">
         <State>
           <runningDeviceTargetSelectedWithDropDown>
@@ -53,10 +53,10 @@
           <timeTargetWasSelectedWithDropDown value="2024-03-15T17:10:32.671597Z" />
         </State>
       </entry>
-      <entry key="noInternetConnectionDialogVisibleOnFirstLaunchWithoutInternet()">
+      <entry key="noInternetConnectionDialogNotVisibleOnFirstLaunchWithoutInternet()">
         <State />
       </entry>
-      <entry key="noInternetConnectionDialogVisibleOnFirstLaunchWithoutInternet() (1)">
+      <entry key="openAppInOfflineModeInCacheModeTest()">
         <State />
       </entry>
     </value>
