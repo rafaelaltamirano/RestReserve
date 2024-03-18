@@ -4,7 +4,7 @@
 
 This project is a restaurant reservation application built using Kotlin and Jetpack Compose. It follows Clean Architecture principles and features a layered architecture, separating concerns into domain, data, and presentation layers. The first thing that was worked on was the architecture, transitioning entirely to Compose. This brought about some issues that were resolved, such as outdated Gradle versions, as well as dependencies and plugins.
 
-egarding the architecture, Clean Architecture and Layered Feature were used. A domain layer was created for the business logic, a data layer for the implementation of interfaces and external connections, and a presentation layer for the UI where all the composables are located. Furthermore, this is separated by feature, in this case, reservations. This app is designed to continue growing.
+Regarding the architecture, Clean Architecture and Layered Feature were used. A domain layer was created for the business logic, a data layer for the implementation of interfaces and external connections, and a presentation layer for the UI where all the composables are located. Furthermore, this is separated by feature, in this case, reservations. This app is designed to continue growing.
 
 Imagine we want to add a new feature for online orders or customer service. It would be as simple as adding a new module with the name of the feature and within it, create the separation that Clean Architecture recommends (presenter - data - domain).
 
