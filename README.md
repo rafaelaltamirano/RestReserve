@@ -32,7 +32,4 @@ The project follows Clean Architecture principles, promoting separation of conce
 ## Contributing
 Contributions are welcome! If you have any suggestions, bug fixes, or feature requests, please let me know.
 
-
-![Tables List](app/src/main/res/screenshoots/tables_screen.png)
-![Customers List](app/src/main/res/screenshoots/customers_list.png)
-![Dialog](app/src/main/res/screenshoots/customers_list.png)
+<img src="app/src/main/res/screenshoots/customers_list.png" alt="Customer List" width="300"/>
