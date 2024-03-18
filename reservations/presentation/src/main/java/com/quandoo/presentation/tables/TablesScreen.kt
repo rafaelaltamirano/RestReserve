@@ -48,7 +48,8 @@ fun TablesScreen(
         }
     }
 
-    ReserveDialog(show = state.showDialog,
+    ReserveDialog(
+        show = state.showDialog,
         reserveNumber = state.selectedReservation?.reservationId.toString(),
         reservedBy = state.selectedReservation?.customerName,
         tableNumber = state.selectedReservation?.tableId.toString(),

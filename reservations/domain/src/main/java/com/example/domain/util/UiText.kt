@@ -1,6 +1,7 @@
 package com.example.domain.util
 
 import android.content.Context
+import android.graphics.Bitmap
 
 sealed class UiText {
     data class DynamicString(val value: String): UiText()
@@ -13,3 +14,4 @@ sealed class UiText {
         }
     }
 }
+

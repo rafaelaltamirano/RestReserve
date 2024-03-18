@@ -43,9 +43,8 @@ class FakeReservationsRepositoryImp : ReservationsRepository {
     private fun generateFakeReservations(): List<Reservation> {
         // Generar una lista de reservas falsas
         return listOf(
-            Reservation(id = 1, tableId = 1, userId = 1),
-            Reservation(id = 2, tableId = 2, userId = 2),
-            Reservation(id = 3, tableId = 3, userId = 3)
+            Reservation(userId = 2, tableId = 2, id = 102),
+            Reservation(userId = 3, tableId = 3, id = 103)
         )
     }
 }

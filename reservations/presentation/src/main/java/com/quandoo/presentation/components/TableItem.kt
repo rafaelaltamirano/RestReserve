@@ -32,8 +32,8 @@ import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.quandoo.presentation.R
 import com.example.domain.model.Customer
+import com.quandoo.presentation.R
 import java.util.Locale
 
 @Composable
@@ -89,6 +89,7 @@ fun TableItem(
                     modifier = Modifier
                         .width(90.dp)
                         .height(90.dp)
+
                 )
             }
             Column(
@@ -119,6 +120,7 @@ fun TableItem(
                     maxLines = 1,
                     fontWeight = Bold,
                     overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.testTag("ReserveBy$tableId"),
                 )
 
             }

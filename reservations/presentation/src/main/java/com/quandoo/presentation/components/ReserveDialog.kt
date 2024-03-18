@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.DarkGray
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -85,7 +86,7 @@ fun ReserveDialog(
 
                     Image(
                         painter = rememberAsyncImagePainter(image),
-                        contentDescription = "cover",
+                        contentDescription = "profileCustomerImage$reservedBy",
                         modifier = Modifier
                             .width(9000.dp)
                             .height(150.dp)
@@ -112,7 +113,8 @@ fun ReserveDialog(
                         Box(
                             modifier = Modifier
                                 .weight(1f)
-                                .clickable { onDelete() },
+                                .clickable { onDelete() }
+                                .testTag("DeleteReserveButton"),
                             contentAlignment = Alignment.Center
                         ) {
                             Icon(

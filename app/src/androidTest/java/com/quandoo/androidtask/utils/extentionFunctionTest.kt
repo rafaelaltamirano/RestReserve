@@ -6,6 +6,7 @@ import androidx.compose.ui.test.captureToImage
 import androidx.navigation.NavController
 import junit.framework.TestCase.assertEquals
 
+
 fun SemanticsNodeInteraction.assertBackgroundColor(expectedBackground: Color) {
     val capturedName = captureToImage().colorSpace.name
     assertEquals(expectedBackground.colorSpace.name, capturedName)

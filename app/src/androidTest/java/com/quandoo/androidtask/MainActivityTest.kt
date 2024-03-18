@@ -19,22 +19,23 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.test.assert
 import androidx.compose.ui.test.assertCountEquals
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertTextEquals
+import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onChildren
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.testing.TestNavHostController
 import com.example.domain.model.Customer
 import com.example.domain.model.Reservation
@@ -48,7 +49,6 @@ import com.example.domain.use_case.GetTables
 import com.example.domain.use_case.InsertReservation
 import com.example.domain.use_case.LoadReservations
 import com.example.domain.util.UiEvent
-import com.google.common.truth.Truth.assertThat
 import com.quandoo.androidtask.repositoryImp.FakeCustomersRepositoryImp
 import com.quandoo.androidtask.repositoryImp.FakeReservationsRepositoryImp
 import com.quandoo.androidtask.repositoryImp.FakeTablesRepositoryImp
@@ -61,21 +61,20 @@ import com.quandoo.presentation.components.CustomerItem
 import com.quandoo.presentation.components.ReserveDialog
 import com.quandoo.presentation.components.TableItem
 import com.quandoo.presentation.navigation.Route
-import com.quandoo.presentation.tables.TablesScreen
 import com.quandoo.presentation.tables.TablesViewModel
-import com.quandoo.presentation.users.CustomersScreen
 import com.quandoo.presentation.users.CustomersViewModel
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkObject
+import junit.framework.TestCase.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
 @HiltAndroidTest
-class OpenAppInOfflineModeInCacheModeTest {
+class MainActivityTest {
 
     @get:Rule(order = 0)
     var hiltRule = HiltAndroidRule(this)
@@ -116,9 +115,22 @@ class OpenAppInOfflineModeInCacheModeTest {
             Reservation(userId = 3, tableId = 3, id = 103)
         )
         customerRepositoryFake.customers = listOf(
-            Customer(id = 1, firstName = "John", lastName = "Doe", imageUrl = "https://example.com/johndoe.jpg"),
-            Customer(id = 2, firstName = "Jane", lastName = "Smith", imageUrl = "https://example.com/janesmith.jpg"),
-            Customer(id = 3, firstName = "Alice", lastName = "Johnson", imageUrl = "https://example.com/alicejohnson.jpg")
+            Customer(
+                id = 1,
+                firstName = "John",
+                lastName = "Doe",
+                imageUrl = "https://example.com/johndoe.jpg"
+            ), Customer(
+                id = 2,
+                firstName = "Jane",
+                lastName = "Smith",
+                imageUrl = "https://example.com/janesmith.jpg"
+            ), Customer(
+                id = 3,
+                firstName = "Alice",
+                lastName = "Johnson",
+                imageUrl = "https://example.com/alicejohnson.jpg"
+            )
         )
 
         tablesViewModel = TablesViewModel(
@@ -145,7 +157,8 @@ class OpenAppInOfflineModeInCacheModeTest {
 
                 LaunchedEffect(Unit) {
                     if (!preferences.loadFirstRun()) {
-                        val hasConnection = InternetConnectionUtils.checkInternetConnection(mContextMock)
+                        val hasConnection =
+                            InternetConnectionUtils.checkInternetConnection(mContextMock)
                         if (hasConnection) {
                             preferences.saveFirstRun(true)
                             return@LaunchedEffect
@@ -165,13 +178,11 @@ class OpenAppInOfflineModeInCacheModeTest {
                 } else {
                     val scaffoldState = rememberScaffoldState()
                     Scaffold(
-                        modifier = Modifier.fillMaxSize(),
-                        scaffoldState = scaffoldState
+                        modifier = Modifier.fillMaxSize(), scaffoldState = scaffoldState
                     ) {
                         val padding = it
                         NavHost(
-                            navController = navController,
-                            startDestination = Route.TABLES
+                            navController = navController, startDestination = Route.TABLES
                         ) {
                             composable(Route.TABLES) {
 
@@ -202,7 +213,9 @@ class OpenAppInOfflineModeInCacheModeTest {
                                     image = state.selectedReservation?.customerImage,
                                     onDismiss = { tablesViewModel.setShowDialog(false) },
                                     onDelete = {
-                                        tablesViewModel.deleteReserve(state.selectedReservation?.reservationId ?: 0)
+                                        tablesViewModel.deleteReserve(
+                                            state.selectedReservation?.reservationId ?: 0
+                                        )
                                         tablesViewModel.setShowDialog(false)
                                     })
 
@@ -214,7 +227,9 @@ class OpenAppInOfflineModeInCacheModeTest {
                                     ) {
                                         Row(
                                             modifier = Modifier
-                                                .padding(horizontal = 16.dp, vertical = 8.dp)
+                                                .padding(
+                                                    horizontal = 16.dp, vertical = 8.dp
+                                                )
                                                 .fillMaxWidth(),
                                             verticalAlignment = Alignment.CenterVertically,
 
@@ -237,13 +252,17 @@ class OpenAppInOfflineModeInCacheModeTest {
                                         ) {
                                         items(state.tables.size) {
                                             val customer = tablesViewModel.findReservationUserName(
-                                                state.reservations, state.customers, state.tables[it].id
+                                                state.reservations,
+                                                state.customers,
+                                                state.tables[it].id
                                             )
-                                            val reservation = tablesViewModel.getReservationIdIfTableReserved(
-                                                state.tables[it], state.reservations
-                                            )
+                                            val reservation =
+                                                tablesViewModel.getReservationIdIfTableReserved(
+                                                    state.tables[it], state.reservations
+                                                )
                                             val table = state.tables[it]
-                                            val customerName = customer?.firstName + " " + customer?.lastName
+                                            val customerName =
+                                                customer?.firstName + " " + customer?.lastName
                                             val selectedReservation = SelectedReservation(
                                                 customerName,
                                                 reservation?.id ?: 0,
@@ -251,15 +270,16 @@ class OpenAppInOfflineModeInCacheModeTest {
                                                 customer?.imageUrl ?: ""
                                             )
 
-                                            TableItem(
-                                                tableId = table.id,
+                                            TableItem(tableId = table.id,
                                                 customer = customer,
                                                 shape = table.shape,
                                                 hasReserve = reservation != null,
-                                                onItemClick = {tableId ->
+                                                onItemClick = { tableId ->
                                                     if (reservation != null) {
                                                         tablesViewModel.showCustomDialog()
-                                                        tablesViewModel.setSelectedReservation(selectedReservation)
+                                                        tablesViewModel.setSelectedReservation(
+                                                            selectedReservation
+                                                        )
                                                     } else {
                                                         tablesViewModel.onNextClick(tableId)
                                                     }
@@ -271,27 +291,28 @@ class OpenAppInOfflineModeInCacheModeTest {
                             composable(Route.CUSTOMERS) {
                                 val state = customersViewModel.state
 
-                                LaunchedEffect(key1 = true)
-                                {
+                                LaunchedEffect(key1 = true) {
                                     customersViewModel.uiEvent.collect { event ->
                                         when (event) {
                                             is UiEvent.Navigate -> {
                                                 navController.navigate(Route.TABLES)
                                             }
+
                                             else -> Unit
                                         }
                                     }
                                 }
 
                                 Column(
-                                )
-                                {
+                                ) {
                                     Card(
                                         modifier = Modifier.fillMaxWidth(), elevation = 8.dp
                                     ) {
                                         Row(
                                             modifier = Modifier
-                                                .padding(horizontal = 16.dp, vertical = 8.dp)
+                                                .padding(
+                                                    horizontal = 16.dp, vertical = 8.dp
+                                                )
                                                 .fillMaxWidth(),
                                             verticalAlignment = Alignment.CenterVertically,
 
@@ -312,10 +333,11 @@ class OpenAppInOfflineModeInCacheModeTest {
                                     ) {
                                         items(state.customers.size) {
 
-                                            CustomerItem(
-                                                customer = state.customers[it],
-                                                onItemClick = {selectedCustomerId ->
-                                                    customersViewModel.saveCustomerPreference(selectedCustomerId)
+                                            CustomerItem(customer = state.customers[it],
+                                                onItemClick = { selectedCustomerId ->
+                                                    customersViewModel.saveCustomerPreference(
+                                                        selectedCustomerId
+                                                    )
                                                     customersViewModel.insertReservation()
                                                     customersViewModel.onSelectedCustomer()
                                                 })
@@ -330,7 +352,6 @@ class OpenAppInOfflineModeInCacheModeTest {
             }
         }
     }
-
 
 
     @Test
@@ -354,29 +375,118 @@ class OpenAppInOfflineModeInCacheModeTest {
     @Test
     fun TableReservationScreenTest() {
 
+        val firstTable = tablesViewModel.state.tables.first()
+        val firstCustomer = tablesViewModel.state.customers.first()
+
         composeTestRule.waitForIdle()
         composeTestRule.onNodeWithTag("LazyColumnTables").assertExists()
 
-        composeTestRule
-            .onNodeWithTag("Box${tablesViewModel.state.tables.first().id}", useUnmergedTree = true)
-            .assertBackgroundColor(Color.Red)
+        composeTestRule.onNodeWithTag("Box${firstTable.id}", useUnmergedTree = true)
+            .assertBackgroundColor(Color.Green)
 
-        composeTestRule.onNodeWithTag("Table${tablesViewModel.state.tables.first().id}",useUnmergedTree = true).performClick()
+        composeTestRule.onNodeWithTag("Table${firstTable.id}", useUnmergedTree = true)
+            .performClick()
 
         composeTestRule.waitForIdle()
-        Thread.sleep(5000)
 
         navController.assertCurrentRouteName(Route.CUSTOMERS)
 
 
-        composeTestRule.onNodeWithTag("Customer${tablesViewModel.state.customers.first().id}").performClick()
+        composeTestRule.onNodeWithTag("Customer${firstCustomer.id}").performClick()
+
+        every { preferences.loadReserve() } returns Reservation(
+            userId = firstCustomer.id, tableId = firstTable.id, id = 101
+        )
+
+        customersViewModel.insertReservation()
+
+        tablesViewModel.requestReservation()
 
         composeTestRule.waitForIdle()
 
         navController.assertCurrentRouteName(Route.TABLES)
 
-        composeTestRule
-            .onNodeWithTag("Box${tablesViewModel.state.tables.first().id}",useUnmergedTree = true)
-            .assertBackgroundColor(Color.Green)
+        tablesViewModel.requestTables()
+
+        composeTestRule.onNodeWithTag("Box${firstTable.id}", useUnmergedTree = true)
+            .assertBackgroundColor(Color.Red)
+
+        composeTestRule.onNodeWithTag("ReserveBy${firstTable.id}", useUnmergedTree = true)
+            .assertTextEquals("Reserved by ${firstCustomer.firstName} ${firstCustomer.lastName}")
+    }
+
+    @Test
+    fun TableReservationCancellation() {
+
+        val secondTable = tablesViewModel.state.tables[1]
+        val firstReservation = tablesViewModel.state.reservations.first()
+
+
+        composeTestRule.waitForIdle()
+        composeTestRule.onNodeWithTag("LazyColumnTables").assertExists()
+
+        composeTestRule.onNodeWithTag(
+                "Box${secondTable.id}",
+                useUnmergedTree = true
+            ).assertBackgroundColor(Color.Red)
+
+        composeTestRule.onNodeWithTag(
+            "Table${secondTable.id}", useUnmergedTree = true
+        ).performClick()
+
+
+        tablesViewModel.setShowDialog(true)
+
+        composeTestRule.onNodeWithTag(
+            "DeleteReserveButton", useUnmergedTree = true
+        ).performClick()
+
+
+        tablesViewModel.deleteReserve(firstReservation.id)
+
+        tablesViewModel.setShowDialog(false)
+
+        composeTestRule.onNodeWithTag(
+            "Box${secondTable.id}",
+            useUnmergedTree = true
+        ).assertBackgroundColor(Color.Green)
+
+        composeTestRule.onNodeWithTag("ReserveBy${secondTable.id}", useUnmergedTree = true)
+            .assertTextEquals("FREE")
+
+
+    }
+
+    @Test
+     fun ReservedTableVisualFeedback() {
+
+        val secondTable = tablesViewModel.state.tables[1]
+        val secondCustomer = customerRepositoryFake.customers[1]
+
+        composeTestRule.waitForIdle()
+        composeTestRule.onNodeWithTag("LazyColumnTables").assertExists()
+
+
+        composeTestRule.onNodeWithTag("ReserveBy${secondTable.id}", useUnmergedTree = true)
+            .assertTextEquals("Reserved by ${secondCustomer.firstName} ${secondCustomer.lastName}")
+
+        composeTestRule.onNodeWithTag(
+            "Table${secondTable.id}", useUnmergedTree = true
+        ).performClick()
+
+
+        tablesViewModel.setShowDialog(true)
+
+        composeTestRule.waitForIdle()
+
+
+        composeTestRule.onNodeWithContentDescription("profileCustomerImage${secondCustomer.firstName + " " + secondCustomer.lastName}").assertIsDisplayed()
+
+
+      composeTestRule.onNodeWithContentDescription("profileCustomerImage${secondCustomer.firstName + " " + secondCustomer.lastName}").captureToImage()
+            .asAndroidBitmap()
+            .also { bitmapImage ->
+                assertTrue(bitmapImage.width > 0 && bitmapImage.height > 0)
+            }
     }
 }
