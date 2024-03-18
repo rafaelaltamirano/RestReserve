@@ -32,4 +32,7 @@ The project follows Clean Architecture principles, promoting separation of conce
 ## Contributing
 Contributions are welcome! If you have any suggestions, bug fixes, or feature requests, please let me know.
 
+
+<img src="app/src/main/res/screenshoots/tabes_screen.png" alt="Tables List" width="300"/>
 <img src="app/src/main/res/screenshoots/customers_list.png" alt="Customer List" width="300"/>
+<img src="app/src/main/res/screenshoots/dialog.png" alt="Dialog" width="300"/>
