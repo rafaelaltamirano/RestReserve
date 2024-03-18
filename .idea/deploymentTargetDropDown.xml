@@ -2,31 +2,6 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="MainActivityTest">
-        <State>
-          <targetSelectedWithDropDown>
-            <Target>
-              <type value="QUICK_BOOT_TARGET" />
-              <deviceKey>
-                <Key>
-                  <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="$USER_HOME$/.android/avd/Pixel_4_API_30.avd" />
-                </Key>
-              </deviceKey>
-            </Target>
-          </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-03-15T13:44:06.857802Z" />
-        </State>
-      </entry>
-      <entry key="ReservedTableVisualFeedback()">
-        <State />
-      </entry>
-      <entry key="TableReservationCancellation()">
-        <State />
-      </entry>
-      <entry key="TableReservationScreenTest() (1)">
-        <State />
-      </entry>
       <entry key="app">
         <State>
           <runningDeviceTargetSelectedWithDropDown>
@@ -42,9 +17,6 @@
           </runningDeviceTargetSelectedWithDropDown>
           <timeTargetWasSelectedWithDropDown value="2024-03-15T17:10:32.671597Z" />
         </State>
-      </entry>
-      <entry key="openAppInOfflineModeInCacheModeTest()">
-        <State />
       </entry>
     </value>
   </component>

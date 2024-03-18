@@ -86,8 +86,6 @@ dependencies {
     androidTestImplementation(Testing.testRunner)
     kaptAndroidTest(DaggerHilt.hiltCompiler)
     androidTestImplementation(Testing.navigationTest)
-    implementation(Coil.coilCompose)
-    implementation("io.coil-kt:coil-base:2.6.0")
 
     implementation(DaggerHilt.hiltAndroid)
     kapt(DaggerHilt.hiltCompiler)
@@ -100,6 +98,7 @@ dependencies {
     implementation(Compose.uiToolingPreview)
     implementation(Compose.hiltNavigationCompose)
     implementation(Compose.navigation)
+    implementation(Coil.coilCompose)
 
     implementation(Retrofit.okHttp)
     implementation(Retrofit.retrofit)

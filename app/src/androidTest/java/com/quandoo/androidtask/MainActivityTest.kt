@@ -458,7 +458,7 @@ class MainActivityTest {
     }
 
     @Test
-     fun ReservedTableVisualFeedback() {
+     fun reservedTableVisualFeedbackWhenUserClickATable() {
 
         val secondTable = tablesViewModel.state.tables[1]
         val secondCustomer = customerRepositoryFake.customers[1]

@@ -7,6 +7,5 @@ class DeleteReservation (
 ){
     suspend operator fun invoke(reserveId: Int) {
         repository.deleteReservationById(reserveId)
-        repository.load()
     }
 }
