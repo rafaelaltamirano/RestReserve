@@ -59,6 +59,7 @@ android {
 
 dependencies {
     implementation(project(Modules.domain))
+    implementation(project(Modules.core))
     implementation(project(Modules.presentation))
 
     testImplementation(Testing.junit4)
@@ -71,8 +72,7 @@ dependencies {
     testImplementation(Testing.mockWebServer)
     testImplementation(Testing.espressoCore)
     testImplementation(Testing.espressoContrib)
-    testImplementation "io.mockk:mockk:1.13.3"
-    androidTestImplementation "io.mockk:mockk-android:1.13.3"
+//    androidTestImplementation "io.mockk:mockk-android:1.13.3"
 
     androidTestImplementation(Testing.junit4)
     androidTestImplementation(Testing.junitAndroidExt)

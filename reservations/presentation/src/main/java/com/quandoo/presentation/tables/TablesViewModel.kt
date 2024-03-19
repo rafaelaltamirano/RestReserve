@@ -14,7 +14,7 @@ import com.example.domain.use_case.GetCustomers
 import com.example.domain.use_case.GetReservations
 import com.example.domain.use_case.GetTables
 import com.example.domain.use_case.LoadReservations
-import com.example.domain.util.UiEvent
+import com.quandoo.core.util.UiEvent
 import com.quandoo.presentation.ViewModelWithStatus
 import com.quandoo.presentation.navigation.Route
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -40,7 +40,7 @@ class TablesViewModel @Inject constructor(
         private set
 
 
-    private val _uiEvent = Channel<UiEvent>()
+    private val _uiEvent = Channel<com.quandoo.core.util.UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
     init {
@@ -111,7 +111,7 @@ class TablesViewModel @Inject constructor(
 
     fun showCustomDialog() {
         viewModelScope.launch {
-            _uiEvent.send(UiEvent.ShowCustomDialog)
+            _uiEvent.send(com.quandoo.core.util.UiEvent.ShowCustomDialog)
         }
     }
 
@@ -148,7 +148,7 @@ class TablesViewModel @Inject constructor(
     fun onNextClick(tableId: Int) {
         viewModelScope.launch {
             preferences.saveTable(tableId)
-            _uiEvent.send(UiEvent.Navigate(Route.CUSTOMERS))
+            _uiEvent.send(com.quandoo.core.util.UiEvent.Navigate(Route.CUSTOMERS))
         }
     }
 

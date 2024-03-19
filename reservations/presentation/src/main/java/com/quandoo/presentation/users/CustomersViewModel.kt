@@ -8,7 +8,7 @@ import com.example.domain.model.Customer
 import com.example.domain.preferences.Preferences
 import com.example.domain.use_case.GetCustomers
 import com.example.domain.use_case.InsertReservation
-import com.example.domain.util.UiEvent
+import com.quandoo.core.util.UiEvent
 import com.quandoo.presentation.ViewModelWithStatus
 import com.quandoo.presentation.navigation.Route.TABLES
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,7 +32,7 @@ class CustomersViewModel  @Inject constructor(
         loadCustomers()
     }
 
-    private val _uiEvent = Channel<UiEvent>()
+    private val _uiEvent = Channel<com.quandoo.core.util.UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
     private fun setCustomers(customers: List<Customer>) {
@@ -45,7 +45,7 @@ class CustomersViewModel  @Inject constructor(
 
     fun onSelectedCustomer() {
         viewModelScope.launch {
-            _uiEvent.send(UiEvent.Navigate(TABLES))
+            _uiEvent.send(com.quandoo.core.util.UiEvent.Navigate(TABLES))
         }
     }
 

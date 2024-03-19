@@ -15,10 +15,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.domain.model.SelectedReservation
-import com.example.domain.util.UiEvent
+import com.quandoo.core.R
 import com.quandoo.presentation.components.BackPressHandler
 import com.quandoo.presentation.components.ReserveDialog
 import com.quandoo.presentation.components.TableItem
@@ -35,11 +36,11 @@ fun TablesScreen(
     LaunchedEffect(key1 = true) {
         tablesViewModel.uiEvent.collect { event ->
             when (event) {
-                is UiEvent.Navigate -> {
+                is com.quandoo.core.util.UiEvent.Navigate -> {
                     onNextClick()
                 }
 
-                is UiEvent.ShowCustomDialog -> {
+                is com.quandoo.core.util.UiEvent.ShowCustomDialog -> {
                     tablesViewModel.setShowDialog(true)
                 }
 
@@ -75,7 +76,7 @@ fun TablesScreen(
                 ) {
 
                 Text(
-                    text = "Reserved tables",
+                    text = stringResource(R.string.reserved_tables),
                     color = Color.DarkGray,
                     style = MaterialTheme.typography.h1,
                     maxLines = 1,

@@ -26,6 +26,7 @@ android {
 dependencies {
     implementation(project(Modules.domain))
     implementation(project(Modules.data))
+    implementation(project(Modules.core))
 
     implementation(Compose.ui)
     implementation(Compose.material)

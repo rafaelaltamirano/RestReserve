@@ -48,7 +48,6 @@ import com.example.domain.use_case.GetReservations
 import com.example.domain.use_case.GetTables
 import com.example.domain.use_case.InsertReservation
 import com.example.domain.use_case.LoadReservations
-import com.example.domain.util.UiEvent
 import com.quandoo.androidtask.repositoryImp.FakeCustomersRepositoryImp
 import com.quandoo.androidtask.repositoryImp.FakeReservationsRepositoryImp
 import com.quandoo.androidtask.repositoryImp.FakeTablesRepositoryImp
@@ -193,11 +192,11 @@ class MainActivityTest {
                                 LaunchedEffect(key1 = true) {
                                     tablesViewModel.uiEvent.collect { event ->
                                         when (event) {
-                                            is UiEvent.Navigate -> {
+                                            is com.quandoo.core.util.UiEvent.Navigate -> {
                                                 navController.navigate(Route.CUSTOMERS)
                                             }
 
-                                            is UiEvent.ShowCustomDialog -> {
+                                            is com.quandoo.core.util.UiEvent.ShowCustomDialog -> {
                                                 tablesViewModel.setShowDialog(true)
                                             }
 
@@ -294,7 +293,7 @@ class MainActivityTest {
                                 LaunchedEffect(key1 = true) {
                                     customersViewModel.uiEvent.collect { event ->
                                         when (event) {
-                                            is UiEvent.Navigate -> {
+                                            is com.quandoo.core.util.UiEvent.Navigate -> {
                                                 navController.navigate(Route.TABLES)
                                             }
 

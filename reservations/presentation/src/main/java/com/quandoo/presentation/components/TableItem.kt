@@ -28,12 +28,13 @@ import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.domain.model.Customer
-import com.quandoo.presentation.R
+import com.quandoo.core.R
 import java.util.Locale
 
 @Composable
@@ -113,8 +114,9 @@ fun TableItem(
                 )
 
                 Text(
-                    text = customer?.run { "Reserved by ${customer.firstName} ${customer.lastName}" }
-                        ?: "FREE",
+                    text = customer?.run {stringResource(R.string.reserved_by, customer.firstName, customer.lastName)
+                    }
+                        ?: stringResource(R.string.free),
                     color = DarkGray,
                     style = MaterialTheme.typography.body2,
                     maxLines = 1,
