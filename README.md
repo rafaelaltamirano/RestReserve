@@ -27,7 +27,7 @@ Tools for test: MockK, Moshi
 - **UI Test**: We can find them in the app androidTest directory
 - **Unit Test Use Cases**: Use cases test are located in domain unit test directory
 - **Unit Test Repository**: The repository cases are located in data layer unit test directory
-- 
+
 ## Future Improvements
 - **View Model Unit Test**: Add more Unit tests for the View models
 
@@ -35,6 +35,6 @@ Tools for test: MockK, Moshi
 Contributions are welcome! If you have any suggestions, bug fixes, or feature requests, please let me know.
 
 
-![Tables List](core/src/main/res/drawable/tables_screen.png)
-![Customers List](core/src/main/res/drawable/customers_list.png)
-![Dialog](core/src/main/res/drawable/customers_list.png)
+![Tables List](mobile-android-engineer/core/src/main/res/drawable/tables_screen.png)
+![Customers List](mobile-android-engineer/core/src/main/res/drawable/customers_list.png)
+![Dialog](mobile-android-engineer/core/src/main/res/drawable/customers_list.png)
