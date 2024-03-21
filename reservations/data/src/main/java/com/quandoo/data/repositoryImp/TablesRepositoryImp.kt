@@ -1,13 +1,12 @@
 package com.quandoo.data.repositoryImp
 
+import com.example.domain.model.Table
 import com.example.domain.repository.TablesRepository
 import com.quandoo.data.api.RestaurantApi
 import com.quandoo.data.dao.TablesDao
-import com.example.domain.model.Table
 
 class TablesRepositoryImp(
-    private val dao: TablesDao,
-    private val api: RestaurantApi
+    private val dao: TablesDao, private val api: RestaurantApi
 ) : TablesRepository {
 
     var tables: List<Table> = emptyList()
@@ -18,9 +17,11 @@ class TablesRepositoryImp(
                 Result.success(cachedTables)
             } else {
                 val dto = api.getTables()
-                val table = dto.body() ?: emptyList()
-                save(table)
-                Result.success(table)
+                if (dto.isSuccessful) {
+                    val table = dto.body() ?: emptyList()
+                    save(table)
+                    Result.success(table)
+                } else throw Exception()
             }
         } catch (e: Exception) {
             e.printStackTrace()
