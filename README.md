@@ -35,6 +35,6 @@ Tools for test: MockK, Moshi
 Contributions are welcome! If you have any suggestions, bug fixes, or feature requests, please let me know.
 
 
-![Tables List](mobile-android-engineer/core/src/main/res/drawable/tables_screen.png)
-![Customers List](mobile-android-engineer/core/src/main/res/drawable/customers_list.png)
-![Dialog](mobile-android-engineer/core/src/main/res/drawable/customers_list.png)
+![Tables List](core/src/main/res/drawable/tables_screen.png)
+![Customers List](core/src/main/res/drawable/customers_list.png)
+![Dialog](core/src/main/res/drawable/dialog_reserve_screen.png)
