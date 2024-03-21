@@ -19,6 +19,14 @@ Imagine we want to add a new feature for online orders or customer service. It w
 - **Table Reservation**: Allows users to reserve a table by selecting a customer to assign to the table.
 - **Reservation Deletion**: Provides the ability to delete a reservation, updating the table's status accordingly.
 - **Offline Support**: Utilizes caching to store data retrieved from the API, allowing offline access to reservation information.
+
+
+## Test
+The project has UI tests and unit tests.
+Tools for test: MockK, Moshi
+- **UI Test**: We can find them in the app androidTest directory
+- **Unit Test Use Cases**: Use cases test are located in domain unit test directory
+- **Unit Test Repository**: The repository cases are located in data layer unit test directory
 - 
 ## Future Improvements
 - **View Model Unit Test**: Add more Unit tests for the View models
