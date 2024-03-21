@@ -29,4 +29,4 @@ Contributions are welcome! If you have any suggestions, bug fixes, or feature re
 
 ![Tables List](core/src/main/res/drawable/tables_screen.png)
 ![Customers List](core/src/main/res/drawable/customers_list.png)
-![Dialog](app/src/core/res/drawable/customers_list.png)
+![Dialog](core/src/main/res/drawable/customers_list.png)
